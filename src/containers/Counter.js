@@ -13,7 +13,7 @@ class Counter extends Component {
           {this.props.count}
           </h1>
         </div>
-    </div>
+      </div>
     )
   }
 }
