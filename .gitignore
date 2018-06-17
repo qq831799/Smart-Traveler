@@ -3,6 +3,11 @@
 # develop IDE setting
 /.vscode
 
+#refference files
+src/containers/AddCounter.js
+src/containers/Counter.js
+src/containers/RemoveCounter.js
+
 # dependencies
 /node_modules
 
