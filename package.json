@@ -1,40 +1,20 @@
 {
-  "name": "smart-traveler",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/qq831799/Smart-Traveler.git"
-  },
-  "author": "qq831799, theNewJson",
-  "license": "ISC",
-  "devDependencies": {
-    "babel-core": "^6.24.0",
-    "babel-loader": "^6.4.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-3": "^6.22.0",
-    "webpack": "^2.3.2",
-    "webpack-dev-server": "^2.4.2"
-  },
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "google-maps-react": "^2.0.2",
+    "@material-ui/core": "^1.2.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
     "redux": "^4.0.0"
   },
-  "bugs": {
-    "url": "https://github.com/qq831799/Smart-Traveler/issues"
-  },
-  "homepage": "https://github.com/qq831799/Smart-Traveler#readme"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }

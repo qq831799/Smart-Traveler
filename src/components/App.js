@@ -1,24 +1,51 @@
-// App.js
-
-import React from 'react';
-import Counter from '../containers/Counter';
-import AddCounter from '../containers/AddCounter';
-import RemoveCounter from '../containers/RemoveCounter';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import DatePicker from '../containers/DatePicker';
+import ScheduleContainer from '../containers/ScheduleContainer';
 import MapContainer from '../containers/MapContainer';
-const App = () => {
+
+const styles = theme => ({
+  root:{
+    flexGrow: 1,
+  },
+  scheduleRoot:{
+    backgroundColor:'#2e5eaa',
+  },
+  mapRoot:{
+    backgroundColor:'#7cea9c',
+  },
+  MapTitle:{
+    marginTop: '200px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    textAlign: 'center',
+    width: 'fit-content',
+    width: '-webkit-fit-content',
+    width: '-moz-fit-content',
+  }
+
+});
+
+const App = (props) => {
+  const {classes} = props;
+
   return (
-    <div className="container">
-      <Counter></Counter><br />
-      <div className="columns">
-        <div className="column is-11">
-          <AddCounter></AddCounter>
-        </div>
-        <div className="column auto">
-          <RemoveCounter></RemoveCounter>
-        </div>
-      </div>
-      <MapContainer></MapContainer>
-    </div>
+    <Grid container className={classes.root} spacing={16}>
+      <Grid item xs={6} className={classes.scheduleRoot}>
+        <DatePicker></DatePicker>
+        <ScheduleContainer></ScheduleContainer>
+      </Grid>
+      <Grid item xs={6} className={classes.mapRoot}>
+        <h1 className={classes.MapTitle}>MAP</h1>
+        <MapContainer></MapContainer>
+      </Grid>
+    </Grid>
   )
 }
-export default App;
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(App);

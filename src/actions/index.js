@@ -1,5 +1,3 @@
-// index.js
-
 import * as actionType from './ActionType';
 
 export const addCounter = () => ({

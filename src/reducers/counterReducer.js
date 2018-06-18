@@ -1,5 +1,3 @@
-// counterReducer.js
-
 import * as actionType from '../actions/ActionType';
 
 const counterReducer = (state = 0, action) => {
