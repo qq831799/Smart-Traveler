@@ -21,7 +21,6 @@ export class MapContainer extends Component{
    	render(){
    		return(
    			<div className="MapContainer">
-   				<h1>Our Map!</h1>
    				<TheMap google={this.props.google} selectPlace={this.selectPlace}></TheMap>
    			</div>
    			
