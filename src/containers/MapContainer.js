@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { GoogleApiWrapper } from 'google-maps-react';
 import TheMap from '../components/TheMap';
+import { addLocation } from '../actions';
 
 export class MapContainer extends Component{
 	constructor(props) {
@@ -17,6 +19,8 @@ export class MapContainer extends Component{
     }
     selectPlace(place){
     	console.log(place);
+    	this.props.actions(place);
+    	// this.props.dispatch();
     }
    	render(){
    		return(
@@ -27,8 +31,13 @@ export class MapContainer extends Component{
    		)
    	}
 }
+function mapDispatchToProps(dispatch){
+	return{
+		actions: bindActionCreators(addLocation, dispatch)
+	}
+}
 
-export default GoogleApiWrapper({
+export default connect(null,mapDispatchToProps)(GoogleApiWrapper({
 	apiKey: 'AIzaSyDpE6ASlrK_fyKwheIpwS6RvmByadRFb_o',
 	libraries: ['places']
-})(MapContainer)
+})(MapContainer))

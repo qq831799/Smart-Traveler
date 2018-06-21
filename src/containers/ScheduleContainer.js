@@ -25,7 +25,7 @@ class ScheduleContainer extends Component {
       <Grid container>
         <Grid item xs={12} className={classes.scheduleContainer}>
           <h3>Schedule</h3>
-          <Day dayID={1}></Day>
+          <Day dayID={1} location={this.props.location}></Day>
         </Grid>
       </Grid>
     )
@@ -34,8 +34,13 @@ class ScheduleContainer extends Component {
 ScheduleContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 }
+function mapStateToProps(state){
+  return{
+    location:state.locationReducer
+  }
+}
 /* function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(addCounter, dispatch) }
 } */
 //export default connect(mapDispatchToProps)(DatePicker);
-export default withStyles(styles)(ScheduleContainer);
+export default connect(mapStateToProps)(withStyles(styles)(ScheduleContainer));
