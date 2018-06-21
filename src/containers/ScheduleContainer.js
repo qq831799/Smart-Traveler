@@ -43,10 +43,13 @@ ScheduleContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 
+
 function mapStateToProps(state){
   return {
     days: state.dateIntervalReducer,
+    location: state.locationReducer
   };
+
 }
 /* function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(addCounter, dispatch) }

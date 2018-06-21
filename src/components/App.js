@@ -4,7 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import DatePicker from '../containers/DatePicker';
 import ScheduleContainer from '../containers/ScheduleContainer';
+import MapContainer from '../containers/MapContainer';
 import Paper from '@material-ui/core/Paper';
+
 
 const styles = theme => ({
   root:{
@@ -40,9 +42,8 @@ const App = (props) => {
         </Paper>
       </Grid>
       <Grid item xs={6} className={classes.mapRoot}>
-
+        <MapContainer></MapContainer>
       </Grid>
-
     </Grid>
   )
 }

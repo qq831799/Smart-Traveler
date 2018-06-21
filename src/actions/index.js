@@ -10,8 +10,15 @@ export const removeCounter = () => ({
   payload: 1
 });
 
+
+export const addLocation = (place) => (
+{
+	type: actionType.ADD_LOCATION,
+	payload: place
+});
+
 export const addDateInterval = (startDate,endDate) => ({
   type: actionType.ADD_DATE_INTERVAL,
   startDate: startDate,
-  endDate: endDate,
+  endDate: endDate
 });
