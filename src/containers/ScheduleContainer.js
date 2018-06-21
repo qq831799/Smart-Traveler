@@ -31,8 +31,8 @@ class ScheduleContainer extends Component {
       <Grid container>
         <Grid item xs={12} className={classes.scheduleContainer}>
           <h3>Schedule</h3>
-            {[...Array(this.calculateDate(this.props))].map(function(e , i){
-            return <Day dayID={i+1} key={'day' + i + 1}></Day>}
+            {[...Array(this.calculateDate(this.props))].map(
+              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} location={this.props.location}></Day>}
             )}
         </Grid>
       </Grid>
