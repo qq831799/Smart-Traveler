@@ -13,10 +13,11 @@ class Day extends Component {
   constructor(props){
     super(props);
   }
+  
   render(){
     const {classes} = this.props;
     return (
-    <div className={classes.dayContent}>
+    <div className={classes.dayContent} onClick={this.props.onFocus}>
       <Grid container>
         <Grid item xs={12}>
           時間條

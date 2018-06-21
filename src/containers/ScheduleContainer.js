@@ -22,8 +22,11 @@ class ScheduleContainer extends Component {
     let startDate = new Date(props.days[0].startDate);
     let endDate = new Date(props.days[0].endDate);
     //console.log(props.days.startDate);
-    console.log((endDate-startDate)/(24*3600*1000));
+    //console.log((endDate-startDate)/(24*3600*1000));
     return (endDate-startDate)/(24*3600*1000) + 1
+  }
+  focus(){
+    console.log('C');
   }
   render() {
     const {classes} = this.props;
@@ -32,7 +35,7 @@ class ScheduleContainer extends Component {
         <Grid item xs={12} className={classes.scheduleContainer}>
           <h3>Schedule</h3>
             {[...Array(this.calculateDate(this.props))].map(
-              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} location={this.props.location}></Day>}
+              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} location={this.props.location} onFocus={this.focus}></Day>}
             )}
         </Grid>
       </Grid>

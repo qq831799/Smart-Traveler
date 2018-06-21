@@ -1,15 +1,19 @@
 // locationReducer.js
 import * as actionType from '../actions/ActionType';
 const initialState = {
-	name: '',
-	id: '',
-	address: ''
+  onfocus:1,  //default focus first day
+  1 :{
+    date:new Date(),
+    location:[]
+  }
 };
 const locationReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case actionType.ADD_LOCATION:
-      return newState = action.payload;
+    newState = {...state};
+    newState[newState.onfocus].location.push(action.payload);
+      return newState;
     default:
       return state;
   }
