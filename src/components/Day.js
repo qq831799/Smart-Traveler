@@ -5,15 +5,13 @@ import Grid from '@material-ui/core/Grid';
 
 const styles = theme =>({
   dayContent:{
-    borderWidh: '1px',
-    borderStyle: 'solid',
-    borderColor: '#5b4e77'
+
   },
 });
 
 class Day extends Component {
   constructor(props){
-      super(props);
+    super(props);
   }
   render(){
     const {classes} = this.props;
