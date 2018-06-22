@@ -27,14 +27,9 @@ class ScheduleContainer extends Component {
     //console.log((endDate-startDate)/(24*3600*1000));
     return (endDate-startDate)/(24*3600*1000) + 1
   }
-<<<<<<< HEAD
-  focus(){
-    
-=======
   focus(dayID){
     console.log(dayID);
     this.props.actions(dayID);
->>>>>>> 2d7f39f429426f86ba7437012ea9c70022a81c0b
   }
   render() {
     const {classes} = this.props;
