@@ -19,7 +19,6 @@ class Day extends Component {
     const {schedule} = nextProps;
     this.props = nextProps;
     if(schedule[dayID] !== undefined && schedule[dayID].location !== undefined && schedule[dayID].location.length){
-      
       this.Text = schedule[dayID].location.map((place,index) => {
         return <p key={index}>{place.name}</p>
       });
