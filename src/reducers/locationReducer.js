@@ -26,14 +26,17 @@ const locationReducer = (state = initialState, action) => {
       newState[newState.focusDay].location.push(action.payload);
       return newState;
     case actionType.UPDATE_TRIP_INTERVAL:
-      newState.startDate = new Date(action.payload.startDate);
-      newState.endDate = new Date(action.payload.endDate);
-      console.log((newState.endDate-newState.startDate)/(24*3600*1000) + 1);
-      let tmpDate = new Date();
-      console.log(tmpDate.getDate());
-      for(var i = 0 ; i < (newState.endDate-newState.startDate)/(24*3600*1000) + 1 ; i++){
+      newState.startDate = action.payload.startDate;
+      newState.endDate = action.payload.endDate;
+      let startDate = new Date(newState.startDate);
+      let endDate = new Date(newState.endDate);
+      // console.log((newState.endDate-newState.startDate)/(24*3600*1000) + 1);
+      
+      for(let i = 0 ; i < (endDate-startDate)/(24*3600*1000) + 1 ; i++){
         if(newState[i+1] === undefined){
-          newState[i+1] = {date: new Date(newState.startDate.getDate()+i), location:[]};
+          let tmpDate = startDate;
+          tmpDate.setDate(tmpDate.getDate()+i)
+          newState[i+1] = {date: tmpDate, location:[]};
         }
       }
       return newState;
