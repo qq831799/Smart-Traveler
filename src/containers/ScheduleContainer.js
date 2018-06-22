@@ -21,8 +21,9 @@ class ScheduleContainer extends Component {
     this.focus = this.focus.bind(this);
   }
   calculateDate(props){
-    let startDate = new Date(props.days[0].startDate);
-    let endDate = new Date(props.days[0].endDate);
+    // console.log(props);
+    let startDate = new Date(props.schedule.startDate);
+    let endDate = new Date(props.schedule.endDate);
     //console.log(props.days.startDate);
     //console.log((endDate-startDate)/(24*3600*1000));
     return (endDate-startDate)/(24*3600*1000) + 1
@@ -52,7 +53,6 @@ ScheduleContainer.propTypes = {
 
 function mapStateToProps(state){
   return {
-    days: state.dateIntervalReducer,
     schedule: state.locationReducer
   }
 }

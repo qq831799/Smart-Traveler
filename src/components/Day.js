@@ -17,7 +17,7 @@ class Day extends Component {
   componentWillReceiveProps(nextProps){
     const {dayID} = nextProps;
     const {schedule} = nextProps;
-    console.log(schedule);
+    // console.log(schedule);
     this.props = nextProps;
     if(schedule[dayID] !== undefined && schedule[dayID].location !== undefined && schedule[dayID].location.length){
       this.Text = schedule[dayID].location.map((place,index) => {

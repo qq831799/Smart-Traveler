@@ -4,8 +4,6 @@ import locationReducer from './locationReducer';
 import dateIntervalReducer from './dateIntervalReducer';
 
 const counterApp = combineReducers({
-  counterReducer,
-  dateIntervalReducer,
   locationReducer
 })
 

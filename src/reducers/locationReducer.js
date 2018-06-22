@@ -1,6 +1,8 @@
 // locationReducer.js
 import * as actionType from '../actions/ActionType';
 const initialState = {
+  startDate: new Date(),
+  endDate: new Date(),
   focusDay:1,  //default focus first day
   1 :{
     date:new Date(),
@@ -14,14 +16,26 @@ const locationReducer = (state = initialState, action) => {
     case actionType.UPDATE_FOCUS_DAY:
       newState.focusDay = action.payload;
       newState[state.focusDay].isFocus = false;
-      newState[action.payload].isFocus = true;
+      newState[newState.focusDay].isFocus = true;
+      console.log(newState);
       return newState;
     case actionType.ADD_LOCATION:
-      console.log(newState);
-      if(newState[newState.focusDay] === undefined){
-        newState[newState.focusDay] = {date:new Date(),location:[]};
-      }
+      // if(newState[newState.focusDay] === undefined){
+      //   newState[newState.focusDay] = {date:new Date(),location:[]};
+      // }
       newState[newState.focusDay].location.push(action.payload);
+      return newState;
+    case actionType.UPDATE_TRIP_INTERVAL:
+      newState.startDate = new Date(action.payload.startDate);
+      newState.endDate = new Date(action.payload.endDate);
+      console.log((newState.endDate-newState.startDate)/(24*3600*1000) + 1);
+      let tmpDate = new Date();
+      console.log(tmpDate.getDate());
+      for(var i = 0 ; i < (newState.endDate-newState.startDate)/(24*3600*1000) + 1 ; i++){
+        if(newState[i+1] === undefined){
+          newState[i+1] = {date: new Date(newState.startDate.getDate()+i), location:[]};
+        }
+      }
       return newState;
     default:
       return state;

@@ -23,8 +23,14 @@ export const updateFocusDay = (dayID) => (
 	payload: dayID
 });
 
-export const addDateInterval = (startDate,endDate) => ({
-  type: actionType.ADD_DATE_INTERVAL,
-  startDate: startDate,
-  endDate: endDate
+export const updateTripInterval = (startDate,endDate) => (
+{
+  type: actionType.UPDATE_TRIP_INTERVAL,
+  payload: {startDate: startDate, endDate: endDate}
 });
+
+// export const addDateInterval = (startDate,endDate) => ({
+//   type: actionType.ADD_DATE_INTERVAL,
+//   startDate: startDate,
+//   endDate: endDate
+// });

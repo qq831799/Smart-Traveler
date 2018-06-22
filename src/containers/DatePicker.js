@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addDateInterval } from '../actions';
+import { updateTripInterval } from '../actions';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -54,8 +54,8 @@ class DatePicker extends Component {
     if(this.startDate.value !== '' && this.endDate.value !== ''){
       this.setState({startDateIsError: false});
       this.setState({endDateIsError: false});
-      this.props.dispatch(addDateInterval(this.startDate.value,this.endDate.value));
-    
+      this.props.actions(this.startDate.value,this.endDate.value);
+      
     } else {
 
       if(this.startDate.value === ''){
@@ -124,7 +124,7 @@ DatePicker.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(addDateInterval , dispatch) }
+  return { actions: bindActionCreators(updateTripInterval , dispatch) }
 }
 //export default connect(mapDispatchToProps)(DatePicker);
-export default connect(mapDispatchToProps)(withStyles(styles)(DatePicker));
+export default connect(null,mapDispatchToProps)(withStyles(styles)(DatePicker));
