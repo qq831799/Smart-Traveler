@@ -17,6 +17,12 @@ export const addLocation = (place) => (
 	payload: place
 });
 
+export const updateFocusDay = (dayID) => (
+{
+	type: actionType.UPDATE_FOCUS_DAY,
+	payload: dayID
+});
+
 export const addDateInterval = (startDate,endDate) => ({
   type: actionType.ADD_DATE_INTERVAL,
   startDate: startDate,

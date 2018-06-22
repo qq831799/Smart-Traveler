@@ -16,7 +16,7 @@ const styles = theme => ({
 
   },
   mapRoot:{
-    backgroundColor:'#7cea9c',
+    // backgroundColor:'#7cea9c',
   },
   MapTitle:{
     marginTop: '200px',

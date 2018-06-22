@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { GoogleApiWrapper } from 'google-maps-react';
 import TheMap from '../components/TheMap';
 import { addLocation } from '../actions';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 export class MapContainer extends Component{
 	constructor(props) {
@@ -18,16 +20,29 @@ export class MapContainer extends Component{
         }
     }
     selectPlace(place){
-    	console.log(place);
-    	this.props.actions(place);
+    	this.state.place = {...place};
+    	console.log(this.state.place);
     	// this.props.dispatch();
+    }
+    addPlaceOnClick(e){
+    	this.props.actions(this.state.place);
     }
    	render(){
    		return(
-   			<div className="MapContainer">
+   			<div className="MapContainer" >	
    				<TheMap google={this.props.google} selectPlace={this.selectPlace}></TheMap>
+		        <Grid container>
+		        <Grid item xs={12}>
+			        <Button
+			            variant="contained"
+			            color="primary"
+			            onClick={(e) => {this.addPlaceOnClick(e)}}
+			         >
+			            Add Location
+			         </Button>
+		         </Grid>	
+				</Grid>
    			</div>
-   			
    		)
    	}
 }
