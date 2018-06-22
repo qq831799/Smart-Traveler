@@ -1,9 +1,10 @@
 // locationReducer.js
 import * as actionType from '../actions/ActionType';
 const initialState = {
-  onfocus:1,  //default focus first day
+  focusDay:1,  //default focus first day
   1 :{
     date:new Date(),
+    isFocus:true,
     location:[]
   }
 };
@@ -11,14 +12,16 @@ const locationReducer = (state = initialState, action) => {
   let newState = {...state};
   switch (action.type) {
     case actionType.UPDATE_FOCUS_DAY:
-      newState.onfocus = action.payload;
+      newState.focusDay = action.payload;
+      newState[state.focusDay].isFocus = false;
+      newState[action.payload].isFocus = true;
       return newState;
     case actionType.ADD_LOCATION:
       console.log(newState);
-      if(newState[newState.onfocus] === undefined){
-        newState[newState.onfocus] ={date:new Date(),location:[]};
+      if(newState[newState.focusDay] === undefined){
+        newState[newState.focusDay] = {date:new Date(),location:[]};
       }
-      newState[newState.onfocus].location.push(action.payload);
+      newState[newState.focusDay].location.push(action.payload);
       return newState;
     default:
       return state;
