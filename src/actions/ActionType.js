@@ -2,4 +2,5 @@ export const ADD_COUNTER = 'ADD_COUNTER';
 export const REMOVE_COUNTER = 'REMOVE_COUNTER';
 export const ADD_LOCATION = 'ADD_LOCATION';
 export const ADD_DATE_INTERVAL = 'ADD_DATE_INTERVAL';
+export const UPDATE_FOCUS_DAY = 'UPDATE_FOCUS_DAY';
 

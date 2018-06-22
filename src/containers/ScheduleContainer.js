@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Day from '../components/Day'
+import { updateFocusDay } from '../actions';
 
 
 const styles = theme => ({
@@ -17,6 +18,7 @@ const styles = theme => ({
 class ScheduleContainer extends Component {
   constructor(props) {
     super(props);
+    this.focus = this.focus.bind(this);
   }
   calculateDate(props){
     let startDate = new Date(props.days[0].startDate);
@@ -25,8 +27,9 @@ class ScheduleContainer extends Component {
     //console.log((endDate-startDate)/(24*3600*1000));
     return (endDate-startDate)/(24*3600*1000) + 1
   }
-  focus(){
-    console.log('C');
+  focus(dayID){
+    console.log(dayID);
+    this.props.actions(dayID);
   }
   render() {
     const {classes} = this.props;
@@ -35,7 +38,7 @@ class ScheduleContainer extends Component {
         <Grid item xs={12} className={classes.scheduleContainer}>
           <h3>Schedule</h3>
             {[...Array(this.calculateDate(this.props))].map(
-              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} location={this.props.location} onFocus={this.focus}></Day>}
+              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} schedule={this.props.schedule} onFocus={this.focus}></Day>}
             )}
         </Grid>
       </Grid>
@@ -50,12 +53,16 @@ ScheduleContainer.propTypes = {
 function mapStateToProps(state){
   return {
     days: state.dateIntervalReducer,
-    location: state.locationReducer
-  };
-
+    schedule: state.locationReducer
+  }
+}
+function mapDispatchToProps(dispatch){
+  return{
+    actions: bindActionCreators(updateFocusDay, dispatch)
+  }
 }
 /* function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(addCounter, dispatch) }
 } */
 //export default connect(mapDispatchToProps)(DatePicker);
-export default connect(mapStateToProps)(withStyles(styles)(ScheduleContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ScheduleContainer));

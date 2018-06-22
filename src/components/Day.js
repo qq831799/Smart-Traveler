@@ -11,13 +11,26 @@ const styles = theme =>({
 
 class Day extends Component {
   constructor(props){
-    super(props);
+    super(props); 
+    this.Text = "No schedule yet!";
   }
-  
+  componentWillReceiveProps(nextProps){
+    const {dayID} = nextProps;
+    const {schedule} = nextProps;
+    this.props = nextProps;
+    if(schedule[dayID] !== undefined && schedule[dayID].location !== undefined && schedule[dayID].location.length){
+      
+      this.Text = schedule[dayID].location.map((place,index) => {
+        return <p key={index}>{place.name}</p>
+      });
+    }
+  }
   render(){
+    const {dayID} = this.props;
     const {classes} = this.props;
+    const {schedule} = this.props;
     return (
-    <div className={classes.dayContent} onClick={this.props.onFocus}>
+    <div className={classes.dayContent} onClick={()=> this.props.onFocus(dayID)}>
       <Grid container>
         <Grid item xs={12}>
           時間條
@@ -25,7 +38,8 @@ class Day extends Component {
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <h1>Day : {this.props.dayID}</h1>
+          <h1>Day : {dayID}</h1>
+          {this.Text}
         </Grid>
       </Grid>
     </div>
