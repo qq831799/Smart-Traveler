@@ -19,10 +19,12 @@ class Day extends Component {
     const {schedule} = nextProps;
     // console.log(schedule);
     this.props = nextProps;
-    if(schedule[dayID] !== undefined && schedule[dayID].location !== undefined && schedule[dayID].location.length){
-      this.Text = schedule[dayID].location.map((place,index) => {
+    if(schedule.day[dayID].location.length){
+      this.Text = schedule.day[dayID].location.map((place,index) => {
         return <p key={index}>{place.name}</p>
       });
+    }else{
+      this.Text = "No schedule yet!";
     }
   }
   render(){
@@ -30,7 +32,7 @@ class Day extends Component {
     const {classes} = this.props;
     const {schedule} = this.props;
     return (
-    <div className={schedule[dayID].isFocus ? classes.isFocus : ""} onClick={()=> this.props.onFocus(dayID)}>
+    <div className={schedule.day[dayID].isFocus ? classes.isFocus : ""} onClick={()=> this.props.onFocus(dayID)}>
       <Grid container>
         <Grid item xs={12}>
           時間條

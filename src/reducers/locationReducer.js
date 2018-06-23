@@ -3,11 +3,13 @@ import * as actionType from '../actions/ActionType';
 const initialState = {
   startDate: new Date(),
   endDate: new Date(),
-  focusDay:1,  //default focus first day
-  1 :{
-    date:new Date(),
-    isFocus:true,
-    location:[]
+  focusDay: 1,  //default focus first day
+  day:{
+    1:{
+      location:[],
+      date:new Date(),
+      isFocus:true
+    }
   }
 };
 const locationReducer = (state = initialState, action) => {
@@ -15,15 +17,15 @@ const locationReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.UPDATE_FOCUS_DAY:
       newState.focusDay = action.payload;
-      newState[state.focusDay].isFocus = false;
-      newState[newState.focusDay].isFocus = true;
+      newState.day[state.focusDay].isFocus = false;
+      newState.day[newState.focusDay].isFocus = true;
       console.log(newState);
       return newState;
     case actionType.ADD_LOCATION:
       // if(newState[newState.focusDay] === undefined){
       //   newState[newState.focusDay] = {date:new Date(),location:[]};
       // }
-      newState[newState.focusDay].location.push(action.payload);
+      newState.day[newState.focusDay].location.push(action.payload);
       return newState;
     case actionType.UPDATE_TRIP_INTERVAL:
       newState.startDate = action.payload.startDate;
@@ -32,14 +34,24 @@ const locationReducer = (state = initialState, action) => {
       let endDate = new Date(newState.endDate);
       console.log((endDate-startDate)/(24*3600*1000) + 1);
       for(var i = 0 ; i < ((endDate-startDate)/(24*3600*1000) + 1) ; i++){
-        
+        console.log(newState.day[i+1]);
         let tmpDate = new Date(newState.startDate);
         let isFocus = false;
+        let dayID = i+1;
+        console.log(newState.day[dayID]);
         tmpDate.setDate(startDate.getDate()+i);
-        if(newState.focusDay === i+1){
+        if(newState.focusDay === dayID){
           isFocus = true;
         }
-        newState[i+1] = {date: new Date(tmpDate), isFocus:isFocus, location:[]};
+        // if(newState.day[dayID] !== undefined){
+        //   newState.day[dayID] = {...newState.day[dayID],new Date(tmpDate), isFocus:isFocus};
+        // }else{
+        //   newState.day[dayID] = {location:[],new Date(tmpDate), isFocus:isFocus};
+        // }
+        let prevLocation = newState.day[dayID] !== undefined ? newState.day[dayID] : {location: []};
+        console.log(prevLocation);
+        newState.day[dayID] = {...prevLocation,date: new Date(tmpDate), isFocus:isFocus};
+        console.log(newState);
       }
       return newState;
     default:
