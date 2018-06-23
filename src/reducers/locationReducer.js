@@ -36,26 +36,21 @@ const locationReducer = (state = initialState, action) => {
       let startDate = new Date(newState.startDate);
       let endDate = new Date(newState.endDate);
       //console.log((endDate-startDate)/(24*3600*1000) + 1);
-      for(var i = 0 ; i < ((endDate-startDate)/(24*3600*1000) + 1) ; i++){
-
+      let tmpDay = {};
+      var i;
+      for(i = 0 ; i < ((endDate-startDate)/(24*3600*1000) + 1) ; i++){
         let tmpDate = new Date(newState.startDate);
         let isFocus = false;
         let dayID = i+1;
-        console.log(newState.day[dayID]);
         tmpDate.setDate(startDate.getDate()+i);
         if(newState.focusDay === dayID){
           isFocus = true;
         }
-        // if(newState.day[dayID] !== undefined){
-        //   newState.day[dayID] = {...newState.day[dayID],new Date(tmpDate), isFocus:isFocus};
-        // }else{
-        //   newState.day[dayID] = {location:[],new Date(tmpDate), isFocus:isFocus};
-        // }
         let prevLocation = newState.day[dayID] !== undefined ? newState.day[dayID] : {location: []};
-        console.log(prevLocation);
-        newState.day[dayID] = {...prevLocation,date: new Date(tmpDate), isFocus:isFocus};
-        console.log(newState);
+        tmpDay[dayID] = {...prevLocation,date: new Date(tmpDate), isFocus:isFocus};
       }
+      newState.day = tmpDay;
+      console.log(newState);
       return newState;
     default:
       return state;
