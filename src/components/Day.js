@@ -38,7 +38,7 @@ class Day extends Component {
     const {classes} = this.props;
     const {schedule} = this.props;
     return (
-    <div className={schedule.day[dayID].isFocus ? classes.isFocus : "",  classes.dayRoot].join(' ')} onClick={()=> this.props.onFocus(dayID)}>
+    <div className={[schedule.day[dayID].isFocus ? classes.isFocus : "",  classes.dayRoot].join(' ')} onClick={()=> this.props.onFocus(dayID)}>
       <Grid container>
         <Grid item xs={12}>
           時間條
