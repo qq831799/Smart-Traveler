@@ -11,7 +11,8 @@ import { updateFocusDay } from '../actions';
 
 const styles = theme => ({
     scheduleContainer:{
-      
+      maxHeight: '85vh',
+      overflowX: 'auto',
     },
   });
 

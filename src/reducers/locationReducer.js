@@ -1,8 +1,10 @@
 // locationReducer.js
 import * as actionType from '../actions/ActionType';
+
+const today = new Date();
 const initialState = {
-  startDate: new Date(),
-  endDate: new Date(),
+  startDate: today,
+  endDate: today,
   focusDay: 1,  //default focus first day
   day:{
     1:{

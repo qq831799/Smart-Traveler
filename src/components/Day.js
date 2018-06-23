@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
 
 const styles = theme =>({
   dayRoot:{
@@ -13,6 +14,9 @@ const styles = theme =>({
   isFocus:{
     boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
   },
+  chip: {
+    margin: theme.spacing.unit / 2,
+  },
 });
 
 class Day extends Component {
@@ -20,7 +24,7 @@ class Day extends Component {
     super(props); 
     this.Text = "No schedule yet!";
   }
-  componentWillReceiveProps(nextProps){
+  /*componentWillReceiveProps(nextProps){
     const {dayID} = nextProps;
     const {schedule} = nextProps;
     // console.log(schedule);
@@ -32,6 +36,9 @@ class Day extends Component {
     }else{
       this.Text = "No schedule yet!";
     }
+  }*/
+  handleDelete = place => () =>{
+
   }
   render(){
     const {dayID} = this.props;
@@ -47,7 +54,17 @@ class Day extends Component {
       <Grid container>
         <Grid item xs={12}>
           <h1>Day : {dayID}</h1>
-          {this.Text}
+          { console.log(schedule)}
+            {schedule.day[dayID].location.map((place,index) => {
+            console.log(place);
+                return (<Chip
+                  key={index}
+                  label={place.name}
+                  onDelete={this.handleDelete(place)} //to do delete handle
+                  //className={classes.chip}
+                />)
+              })
+          }
         </Grid>
       </Grid>
     </div>
