@@ -20,6 +20,7 @@ const locationReducer = (state = initialState, action) => {
       newState.day[state.focusDay].isFocus = false;
       newState.day[newState.focusDay].isFocus = true;
       console.log(newState);
+
       return newState;
     case actionType.ADD_LOCATION:
       // if(newState[newState.focusDay] === undefined){
@@ -32,9 +33,9 @@ const locationReducer = (state = initialState, action) => {
       newState.endDate = action.payload.endDate;
       let startDate = new Date(newState.startDate);
       let endDate = new Date(newState.endDate);
-      console.log((endDate-startDate)/(24*3600*1000) + 1);
+      //console.log((endDate-startDate)/(24*3600*1000) + 1);
       for(var i = 0 ; i < ((endDate-startDate)/(24*3600*1000) + 1) ; i++){
-        console.log(newState.day[i+1]);
+
         let tmpDate = new Date(newState.startDate);
         let isFocus = false;
         let dayID = i+1;

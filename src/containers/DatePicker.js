@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import grey from '@material-ui/core/colors/grey';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const styles = theme => ({
   datePickerRoot:{
@@ -22,6 +23,9 @@ const styles = theme => ({
   buttonPosition:{
     width:'fit-content',
   },
+  visiable:{
+    display : 'none',
+  },
   startDate:{
 
   },
@@ -33,10 +37,15 @@ const styles = theme => ({
 class DatePicker extends Component {
   constructor(props) {
     super(props);
-    this.startDate = React.createRef();
-    this.endDate = React.createRef();
-
-    //預設為今天(格式為 yyyy/MM/dd)
+    this.startDate = React.createRef(); //to get start date value
+    this.endDate = React.createRef();   //to get end date value
+    this.state = {
+      startDateIsError: false,
+      endDateIsError: false,
+      errorMsg : "",
+    }
+    
+    //預設為今天(格式為 yyyy-MM-dd)
     let today = new Date();
     this.today = '' + today.getFullYear() + '-' 
                     + ((today.getMonth()+1)<10 ? '0' + (today.getMonth()+1) : (today.getMonth()+1)) + '-'
@@ -44,25 +53,29 @@ class DatePicker extends Component {
     this.startDateIsError = false;
     this.endDateIsError = false;
   }
-  state = {
-    startDateIsError: false,
-    endDateIsError: false,
-  }
+
 
   handleClick(e){
     e.preventDefault();
-    if(this.startDate.value !== '' && this.endDate.value !== ''){
+    if(this.startDate.value !== '' && this.endDate.value !== ''){ //If start date and end date is not null
       this.setState({startDateIsError: false});
       this.setState({endDateIsError: false});
-      this.props.actions(this.startDate.value,this.endDate.value);
       
-    } else {
-
-      if(this.startDate.value === ''){
-        this.setState({startDateIsError: true})
+      if(new Date(this.endDate.value) - new Date(this.startDate.value) < 0 ){ //If end date < start date display Error
+        this.setState({endDateIsError: true});
+        this.setState({errorMsg: "End date can't be earlier than start date"});
+      } else {
+        this.props.actions(this.startDate.value,this.endDate.value);
+      }      
+    }
+    else {
+      if(this.startDate.value === ''){  //If start date is null display Error
+        this.setState({startDateIsError: true});
+        this.setState({errorMsg: "Start date can't be null"});
       }
-      if(this.endDate.value === ''){
-        this.setState({endDateIsError: true})
+      if(this.endDate.value === ''){  //If start date is null display Error
+        this.setState({endDateIsError: true});
+        this.setState({errorMsg: "End date can't be null"});
       }
       
     }
@@ -86,6 +99,10 @@ class DatePicker extends Component {
               }}
               inputRef={(e) => {this.startDate = e}}
             />
+            <FormHelperText id="name-error-text"
+            error={this.state.startDateIsError}
+            className = { this.state.startDateIsError ? "" : classes.visiable }
+            >{ this.state.errorMsg }</FormHelperText>
           </form>
         </Grid>
         <Grid item xs={4} className={classes.endDate}>
@@ -103,6 +120,10 @@ class DatePicker extends Component {
               }}
               inputRef={(e)=>{this.endDate = e}}
             />
+            <FormHelperText id="name-error-text"
+            error={true}
+            className = { this.state.endDateIsError ? "" : classes.visiable }
+            >{ this.state.errorMsg }</FormHelperText>
           </form>
         </Grid>
         <Grid item xs={4}>
