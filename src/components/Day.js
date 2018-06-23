@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 const styles = theme =>({
-  dayContent:{
-
+  isFocus:{
+    boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
   },
 });
 
@@ -30,7 +30,7 @@ class Day extends Component {
     const {classes} = this.props;
     const {schedule} = this.props;
     return (
-    <div className={classes.dayContent} onClick={()=> this.props.onFocus(dayID)}>
+    <div className={schedule[dayID].isFocus ? classes.isFocus : ""} onClick={()=> this.props.onFocus(dayID)}>
       <Grid container>
         <Grid item xs={12}>
           時間條
