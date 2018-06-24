@@ -6,45 +6,67 @@ import DatePicker from '../containers/DatePicker';
 import ScheduleContainer from '../containers/ScheduleContainer';
 import MapContainer from '../containers/MapContainer';
 import Paper from '@material-ui/core/Paper';
-
+import Grey from '@material-ui/core/colors/grey';
+import Green from '@material-ui/core/colors/green';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root:{
-    flexGrow: 1,
+    display: 'flex',
+    flexFlow: 'column',
+    height: '100%',
+  },
+  appBar:{
+    backgroundColor: Green[500],
+    flex: '0 1 auto',
+  },
+  containBody:{
+    flex: '1 1 auto',
   },
   scheduleRoot:{
-
+    paddingRight: '1em',
+    paddingLeft: '1em',
+    paddingTop: '1em',
+    backgroundColor: Grey[200],
+    borderRight: '1px solid',
+    borderRightColor : Grey[700],
+  },
+  scheduleContainRoot:{
+    marginTop: '1em',
   },
   mapRoot:{
-    // backgroundColor:'#7cea9c',
+    flexGrow: 1,
   },
-  MapTitle:{
-    marginTop: '200px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    textAlign: 'center',
-    width: 'fit-content',
-    width: '-webkit-fit-content',
-    width: '-moz-fit-content',
-  }
-
 });
 
 const App = (props) => {
   const {classes} = props;
 
   return (
-    <Grid container className={classes.root} spacing={16}>    
-      <Grid item xs={6} className={classes.scheduleRoot}>
-        <Paper>
-          <DatePicker></DatePicker>
-          <ScheduleContainer></ScheduleContainer>
-        </Paper>
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="title" color="inherit">
+            Smart-Traveler
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Grid container className={classes.containBody}>    
+        <Grid item xs={6} className={classes.scheduleRoot}>
+          <Paper className={classes.datePickerContainRoot}>
+            <DatePicker></DatePicker>
+          </Paper>
+          <Paper className={classes.scheduleContainRoot}>
+            <ScheduleContainer></ScheduleContainer>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} className={classes.mapRoot}>
+          <MapContainer></MapContainer>
+        </Grid>
       </Grid>
-      <Grid item xs={6} className={classes.mapRoot}>
-        <MapContainer></MapContainer>
-      </Grid>
-    </Grid>
+    </div>
   )
 }
 App.propTypes = {

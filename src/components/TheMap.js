@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class TheMap extends Component{
+const styles = theme => ({
+  mapRoot:{
+		maxWidth: '100%',
+		maxHeight: '100%',
+		width: '100vw',
+		height: '90vh',
+  },
+});
+
+
+class TheMap extends Component{
+	constructor(props) {
+		super(props);
+	}
 	componentDidMount(){
 		this.loadMap();
 	}
@@ -40,22 +55,22 @@ export default class TheMap extends Component{
 			this.map = new maps.Map(node, mapConfig);
 			this.geocoder = new maps.Geocoder();
 			this.service = new maps.places.PlacesService(this.map);
-			console.log(this);
+			//console.log(this);
 			maps.event.addListener(this.map, 'click', this.mapOnClick.bind(this));
 		}
 	}
 	render(){
-		const style = {
-			width: '45vw',
-			height: '50vh',
-			marginLeft: 'auto',
-			marginRight: 'auto'
-		}
+		const {classes} = this.props;
 		return(
-			<div ref="map" style={style}>
+			<div ref="map" className={classes.mapRoot}>
 			loading map...
 			</div>
 		)
 	}
-
 }
+
+TheMap.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(TheMap);

@@ -7,14 +7,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import grey from '@material-ui/core/colors/grey';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 const styles = theme => ({
   datePickerRoot:{
-    borderBottom: '1px',
-    borderBottomStyle: 'solid',
-    borderBottomColor: grey[500],
     paddingTop: '1em',
     paddingBottom: '1em',
     paddingLeft: '1em',
@@ -25,6 +21,9 @@ const styles = theme => ({
   },
   visiable:{
     display : 'none',
+  },
+  textField:{
+    margin:'0 auto',
   },
   startDate:{
 
@@ -83,8 +82,12 @@ class DatePicker extends Component {
   render() {
     const {classes} = this.props;
     return (
-      <Grid container className={classes.datePickerRoot}>
-        <Grid item xs={4} className={classes.startDate}>
+      <Grid container 
+            className={classes.datePickerRoot}
+            alignItems='center'
+            justify='space-around'
+            >
+        <Grid item className={classes.startDate}>
           <form noValidate>
             <TextField
               id="StartDate"
@@ -105,7 +108,7 @@ class DatePicker extends Component {
             >{ this.state.errorMsg }</FormHelperText>
           </form>
         </Grid>
-        <Grid item xs={4} className={classes.endDate}>
+        <Grid item className={classes.endDate}>
           <form noValidate>
             <TextField
               id="EndDate"
@@ -126,7 +129,7 @@ class DatePicker extends Component {
             >{ this.state.errorMsg }</FormHelperText>
           </form>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item>
         <div className={classes.buttonPosition}>
           <Button
             variant="contained"

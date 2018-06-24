@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
+import Grey from '@material-ui/core/colors/grey';
 
 const styles = theme =>({
   dayRoot:{
@@ -10,6 +11,11 @@ const styles = theme =>({
     paddingBottom: '1em',
     paddingLeft: '1em',
     paddingRight: '1em',
+    borderBottom: '1px solid',
+    borderBottomColor: Grey[300],
+    '&:hover': {
+      backgroundColor: Grey[200],
+    },
   },
   isFocus:{
     boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',

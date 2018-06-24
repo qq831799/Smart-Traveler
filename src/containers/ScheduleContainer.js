@@ -11,9 +11,13 @@ import { updateFocusDay } from '../actions';
 
 const styles = theme => ({
     scheduleContainer:{
-      maxHeight: '85vh',
+      height: '70vh',
+      maxHeight: '100%',
       overflowX: 'auto',
     },
+    spaceContent:{
+      height: '2em',
+    }
   });
 
 class ScheduleContainer extends Component {
@@ -37,10 +41,11 @@ class ScheduleContainer extends Component {
     return (
       <Grid container>
         <Grid item xs={12} className={ classes.scheduleContainer}>
-          <h3>Schedule</h3>
+          
             {[...Array(this.calculateDate(this.props))].map(
               (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} schedule={this.props.schedule} onFocus={this.focus}></Day>}
             )}
+          <div className={classes.spaceContent}></div>
         </Grid>
       </Grid>
     )

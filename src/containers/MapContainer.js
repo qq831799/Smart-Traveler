@@ -1,11 +1,21 @@
+//#region import file
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { GoogleApiWrapper } from 'google-maps-react';
 import TheMap from '../components/TheMap';
 import { addLocation } from '../actions';
-import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+//#endregion
+
+const styles = theme => ({
+  addLocationContainer:{
+		position: 'fixed',
+		top: '600px',
+  },
+});
 
 export class MapContainer extends Component{
 	constructor(props) {
@@ -28,20 +38,18 @@ export class MapContainer extends Component{
     	this.props.actions(this.state.place);
     }
    	render(){
+			const {classes} = this.props;
    		return(
    			<div className="MapContainer" >	
    				<TheMap google={this.props.google} selectPlace={this.selectPlace}></TheMap>
-		        <Grid container>
-		        <Grid item xs={12}>
-			        <Button
-			            variant="contained"
-			            color="primary"
-			            onClick={(e) => {this.addPlaceOnClick(e)}}
-			         >
-			            Add Location
-			         </Button>
-		         </Grid>	
-				</Grid>
+						<Button
+								className={classes.addLocationContainer}
+								variant="contained"
+								color="primary"
+								onClick={(e) => {this.addPlaceOnClick(e)}}
+							>
+								Add Location
+						</Button>
    			</div>
    		)
    	}
@@ -51,8 +59,10 @@ function mapDispatchToProps(dispatch){
 		actions: bindActionCreators(addLocation, dispatch)
 	}
 }
-
-export default connect(null,mapDispatchToProps)(GoogleApiWrapper({
+MapContainer.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(connect(null,mapDispatchToProps)(GoogleApiWrapper({
 	apiKey: 'AIzaSyDpE6ASlrK_fyKwheIpwS6RvmByadRFb_o',
 	libraries: ['places']
-})(MapContainer))
+})(MapContainer)))
