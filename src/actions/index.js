@@ -17,6 +17,12 @@ export const addLocation = (place) => (
 	payload: place
 });
 
+export const deleteLocation = (dayID, index) => (
+{
+  type: actionType.DELETE_LOCATION,
+  payload: {dayID: dayID, index: index}
+});
+
 export const updateFocusDay = (dayID) => (
 {
 	type: actionType.UPDATE_FOCUS_DAY,

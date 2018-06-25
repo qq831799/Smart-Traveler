@@ -43,8 +43,9 @@ class Day extends Component {
       this.Text = "No schedule yet!";
     }
   }*/
-  handleDelete = place => () =>{
+  handleDelete = (index, dayID) => () =>{
 
+    this.props.deleteLocation(dayID,index);
   }
   render(){
     const {dayID} = this.props;
@@ -66,7 +67,7 @@ class Day extends Component {
                 return (<Chip
                   key={index}
                   label={place.name}
-                  onDelete={this.handleDelete(place)} //to do delete handle
+                  onDelete={this.handleDelete(index,dayID)} //to do delete handle
                   //className={classes.chip}
                 />)
               })

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Day from '../components/Day'
-import { updateFocusDay } from '../actions';
+import { updateFocusDay,deleteLocation } from '../actions';
 
 
 const styles = theme => ({
@@ -35,7 +35,7 @@ class ScheduleContainer extends Component {
   // }
   focus(dayID){
     //console.log(dayID);
-    this.props.actions(dayID);
+    this.props.actions.updateFocusDay(dayID);
   }
   render() {
     const {classes} = this.props;
@@ -45,7 +45,8 @@ class ScheduleContainer extends Component {
         <Grid item xs={12} className={ classes.scheduleContainer}>
           
             {[...Array(schedule.duration)].map(
-              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} schedule={schedule} onFocus={this.focus}></Day>}
+              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} schedule={schedule} 
+              onFocus={this.focus} deleteLocation={this.props.actions.deleteLocation}></Day>}
             )}
           <div className={classes.spaceContent}></div>
         </Grid>
@@ -65,7 +66,10 @@ function mapStateToProps(state){
 }
 function mapDispatchToProps(dispatch){
   return{
-    actions: bindActionCreators(updateFocusDay, dispatch)
+    actions:{
+      updateFocusDay: bindActionCreators(updateFocusDay, dispatch),
+      deleteLocation: bindActionCreators(deleteLocation, dispatch)
+    } 
   }
 }
 /* function mapDispatchToProps(dispatch) {

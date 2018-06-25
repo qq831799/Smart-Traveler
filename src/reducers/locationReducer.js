@@ -29,13 +29,16 @@ const locationReducer = (state = initialState, action) => {
       case actionType.ADD_LOCATION:
         draftState.day[draftState.focusDay].location.push(action.payload);
         break;
+      case actionType.DELETE_LOCATION:
+        draftState.day[action.payload.dayID].location.splice(action.payload.index,1);
+        break;
       case actionType.UPDATE_TRIP_DURATION:
         const prevDuration = state.duration;
-        
+
         draftState.startDate = action.payload.startDate;
         draftState.endDate = action.payload.endDate;
         draftState.duration = action.payload.duration;
-        let startDate = new Date(draftState.startDate);
+        const startDate = new Date(draftState.startDate);
         let tmpDate = new Date(draftState.startDate);
         for(let i = 0 ; i < draftState.duration ; i++){
           let dayID = i+1;
@@ -57,6 +60,7 @@ const locationReducer = (state = initialState, action) => {
         draftState.focusDay = 1;
         draftState.day[1].isFocus = true;
         // console.log(draftState.day[1].location === state.day[1].location);
+        break;
     }
   });
 
