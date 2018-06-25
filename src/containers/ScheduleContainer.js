@@ -14,6 +14,7 @@ const styles = theme => ({
       height: '70vh',
       maxHeight: '100%',
       overflowX: 'auto',
+      overflowY: 'hidden',
     },
     spaceContent:{
       height: '2em',

@@ -4,18 +4,30 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
 import Grey from '@material-ui/core/colors/grey';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme =>({
   dayRoot:{
-    paddingTop: '1em',
-    paddingBottom: '1em',
-    paddingLeft: '1em',
-    paddingRight: '1em',
-    borderBottom: '1px solid',
-    borderBottomColor: Grey[300],
+    width: '100%',
     '&:hover': {
       backgroundColor: Grey[200],
     },
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0,
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
   },
   isFocus:{
     boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
@@ -52,18 +64,21 @@ class Day extends Component {
     const {classes} = this.props;
     const {schedule} = this.props;
     return (
-    <div className={[schedule.day[dayID].isFocus ? classes.isFocus : "",  classes.dayRoot].join(' ')} onClick={()=> this.props.onFocus(dayID)}>
-      <Grid container>
-        <Grid item xs={12}>
-          時間條
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item xs={12}>
-          <h1>Day : {dayID}</h1>
-          { console.log(schedule)}
+    <div className={[schedule.day[dayID].isFocus ? classes.isFocus : ""].join(' ')} onClick={()=> this.props.onFocus(dayID)}>
+      <ExpansionPanel className={classes.dayRoot}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography className={classes.heading}>Day : {dayID}</Typography>
+          <Typography className={classes.secondaryHeading}>
             {schedule.day[dayID].location.map((place,index) => {
-            console.log(place);
+                  return (place.name)
+                }).join(',')
+            }
+          </Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+            時間條
+            {schedule.day[dayID].location.map((place,index) => {
+            //console.log(place);
                 return (<Chip
                   key={index}
                   label={place.name}
@@ -72,8 +87,8 @@ class Day extends Component {
                 />)
               })
           }
-        </Grid>
-      </Grid>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </div>
     )
   }
