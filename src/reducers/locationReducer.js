@@ -6,6 +6,7 @@ const today = new Date();
 const initialState = {
   startDate: today,
   endDate: today,
+  duration: 1,
   focusDay: 1,  //default focus first day
   day:{
     1:{
@@ -28,25 +29,29 @@ const locationReducer = (state = initialState, action) => {
       case actionType.ADD_LOCATION:
         draftState.day[draftState.focusDay].location.push(action.payload);
         break;
-      case actionType.UPDATE_TRIP_INTERVAL:
+      case actionType.UPDATE_TRIP_DURATION:
+        const prevDuration = state.duration;
+        
         draftState.startDate = action.payload.startDate;
         draftState.endDate = action.payload.endDate;
+        draftState.duration = action.payload.duration;
         let startDate = new Date(draftState.startDate);
-        let endDate = new Date(draftState.endDate);
-        //console.log((endDate-startDate)/(24*3600*1000) + 1);
-        let tmpDay = {};
-        var i;
-        for(i = 0 ; i < ((endDate-startDate)/(24*3600*1000) + 1) ; i++){
-          let tmpDate = new Date(draftState.startDate);
+        let tmpDate = new Date(draftState.startDate);
+        for(let i = 0 ; i < draftState.duration ; i++){
           let dayID = i+1;
           tmpDate.setDate(startDate.getDate()+i);
           if(draftState.day[dayID] === undefined){
             draftState.day[dayID] = {location: []};
           }
-          draftState.date = new Date(tmpDate);
-          draftState.isFocus = false;
+          draftState.day[dayID].date = new Date(tmpDate);
+          draftState.day[dayID].isFocus = false;
           // let prevLocation = draftState.day[dayID] !== undefined ? draftState.day[dayID] : {location: []};
           // tmpDay[dayID] = {...prevLocation,date: new Date(tmpDate), isFocus:false};
+        }
+
+        //delete the days outside the updated duration
+        for(let i = draftState.duration+1; i <= prevDuration; i++){
+          delete draftState.day[i];
         }
         // draftState.day = tmpDay;
         draftState.focusDay = 1;
@@ -54,7 +59,7 @@ const locationReducer = (state = initialState, action) => {
         // console.log(draftState.day[1].location === state.day[1].location);
     }
   });
-  console.log(state.day[1].location === nextState.day[1].location);
+
   return nextState;
 }
 

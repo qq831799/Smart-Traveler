@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateTripInterval } from '../actions';
+import { updateTripDuration } from '../actions';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -51,8 +51,15 @@ class DatePicker extends Component {
                     + ((today.getDate()+1)<10 ? '0' + (today.getDate()) : (today.getDate()));
     this.startDateIsError = false;
     this.endDateIsError = false;
+    // this.calculateDuration = this.calculateDuration.bind(this); // declare and bind calculateDuration function
   }
-
+  calculateDuration(start, end){ //calculate the duration between two dates
+    // console.log(props);
+    let startDate = new Date(start);
+    let endDate = new Date(end);
+    console.log((endDate-startDate)/(24*3600*1000) + 1);
+    return (endDate-startDate)/(24*3600*1000) + 1;  //divide by (24*3600*1000) because the unit of difference is microsecond
+  }
 
   handleClick(e){
     e.preventDefault();
@@ -64,7 +71,9 @@ class DatePicker extends Component {
         this.setState({endDateIsError: true});
         this.setState({errorMsg: "End date can't be earlier than start date"});
       } else {
-        this.props.actions(this.startDate.value,this.endDate.value);
+        const start = this.startDate.value;
+        const end = this.endDate.value;
+        this.props.actions(start,end,this.calculateDuration(start,end));
       }      
     }
     else {
@@ -148,7 +157,7 @@ DatePicker.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(updateTripInterval , dispatch) }
+  return { actions: bindActionCreators(updateTripDuration , dispatch) }
 }
 //export default connect(mapDispatchToProps)(DatePicker);
 export default connect(null,mapDispatchToProps)(withStyles(styles)(DatePicker));

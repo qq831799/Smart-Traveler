@@ -25,25 +25,27 @@ class ScheduleContainer extends Component {
     super(props);
     this.focus = this.focus.bind(this); // theNewJson need remark
   }
-  calculateDate(props){ //calculate the days between two date
-    // console.log(props);
-    let startDate = new Date(props.schedule.startDate);
-    let endDate = new Date(props.schedule.endDate);
-    console.log((endDate-startDate)/(24*3600*1000) + 1);
-    return (endDate-startDate)/(24*3600*1000) + 1;  //divide by (24*3600*1000) because the unit of difference is microsecond
-  }
+  //***the below is probably not needed anymore
+  // calculateDate(props){ //calculate the days between two date
+  //   // console.log(props);
+  //   let startDate = new Date(props.schedule.startDate);
+  //   let endDate = new Date(props.schedule.endDate);
+  //   console.log((endDate-startDate)/(24*3600*1000) + 1);
+  //   return (endDate-startDate)/(24*3600*1000) + 1;  //divide by (24*3600*1000) because the unit of difference is microsecond
+  // }
   focus(dayID){
     //console.log(dayID);
     this.props.actions(dayID);
   }
   render() {
     const {classes} = this.props;
+    const {schedule} = this.props;
     return (
       <Grid container>
         <Grid item xs={12} className={ classes.scheduleContainer}>
           
-            {[...Array(this.calculateDate(this.props))].map(
-              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} schedule={this.props.schedule} onFocus={this.focus}></Day>}
+            {[...Array(schedule.duration)].map(
+              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} schedule={schedule} onFocus={this.focus}></Day>}
             )}
           <div className={classes.spaceContent}></div>
         </Grid>
