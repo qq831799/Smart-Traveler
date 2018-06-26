@@ -20,7 +20,7 @@ const styles = theme =>({
     },
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(17),
     flexBasis: '20%',
     flexShrink: 0,
   },
@@ -33,22 +33,9 @@ const styles = theme =>({
     color: theme.palette.text.secondary,
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-    overflowY: 'hidden',
+    overflow: 'hidden',
     maxWidth: '30vw',
   },
-<<<<<<< HEAD
-=======
-  locationContainer:{
-    // display: 'flex',
-    // flexDirection: 'column',
-    // height: '50vh',
-  },
-  scheduleContainer:{
-    width:"100%",
-    display: 'flex',
-    flexDirection: 'column',
-  },
->>>>>>> ffde0ad79d04882ea06ff92d962d5bfb912a6ec6
   isFocus:{
     boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
   },
@@ -79,6 +66,11 @@ class Day extends Component {
       this.Text = "No schedule yet!";
     }
   }*/
+  convertDate = (date) =>{
+    let dateString = ((date.getMonth()+1)<10 ? '0' + (date.getMonth()+1) : (date.getMonth()+1)) + '-'
+                    + ((date.getDate())<10 ? '0' + (date.getDate()) : (date.getDate()));
+    return dateString;
+  }
   handleDelete = (index, dayID) => () =>{
 
     this.props.deleteLocation(dayID,index);
@@ -91,7 +83,10 @@ class Day extends Component {
     <div className={[schedule.day[dayID].isFocus ? classes.isFocus : ""].join(' ')} onClick={()=> this.props.onFocus(dayID)}>
       <ExpansionPanel className={classes.dayRoot}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Day : {dayID}</Typography>
+          <Typography className={classes.heading}>
+          <div>Day : {dayID}</div>
+          <div>{ this.convertDate(schedule.day[dayID].date) }</div>
+          </Typography>
           <Typography className={classes.secondaryHeading}>
             {schedule.day[dayID].location.map((place,index) => {
                   return (place.name)
@@ -100,22 +95,26 @@ class Day extends Component {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-        <div className={classes.scheduleContainer}>
-            <Typography className={classes.timeHeading}>時間條</Typography>
-            <hr></hr>
-            <div className={classes.locationContainer}>
-              {schedule.day[dayID].location.map((place,index) => {
-              //console.log(place);
-                  return (<Chip
-                    key={index}
-                    label={place.name}
-                    onDelete={this.handleDelete(index,dayID)} //to do delete handle
-                    //className={classes.chip}
-                  />)
+          <Grid container>
+            {schedule.day[dayID].location.map((place,index) => {
+            //console.log(place);
+                return (
+                <Grid container>
+                  <Grid item xs={4}>
+                    TimePicker
+                  </Grid>
+                  <Grid item xs={8}>
+                    <Chip
+                      key={index}
+                      label={place.name}
+                      onDelete={this.handleDelete(index,dayID)} //to do delete handle
+                      //className={classes.chip}
+                    />
+                  </Grid>
+                </Grid>)
                 })
-              }
-            </div>
-          </div>
+            }
+            </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
 

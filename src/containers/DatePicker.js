@@ -48,7 +48,7 @@ class DatePicker extends Component {
     let today = new Date();
     this.today = '' + today.getFullYear() + '-' 
                     + ((today.getMonth()+1)<10 ? '0' + (today.getMonth()+1) : (today.getMonth()+1)) + '-'
-                    + ((today.getDate()+1)<10 ? '0' + (today.getDate()) : (today.getDate()));
+                    + ((today.getDate())<10 ? '0' + (today.getDate()) : (today.getDate()));
     this.startDateIsError = false;
     this.endDateIsError = false;
     // this.calculateDuration = this.calculateDuration.bind(this); // declare and bind calculateDuration function
