@@ -24,6 +24,10 @@ const styles = theme =>({
     flexBasis: '20%',
     flexShrink: 0,
   },
+  timeHeading: {
+    flexBasis: '20%',
+    flexShrink: 0,
+  },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
@@ -32,10 +36,27 @@ const styles = theme =>({
     overflowY: 'hidden',
     maxWidth: '30vw',
   },
+<<<<<<< HEAD
+=======
+  locationContainer:{
+    // display: 'flex',
+    // flexDirection: 'column',
+    // height: '50vh',
+  },
+  scheduleContainer:{
+    width:"100%",
+    display: 'flex',
+    flexDirection: 'column',
+  },
+>>>>>>> ffde0ad79d04882ea06ff92d962d5bfb912a6ec6
   isFocus:{
     boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
   },
-  chip: {
+  Chip: {
+    width: '4vw',
+    height: '10vh',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'normal',
     margin: theme.spacing.unit / 2,
   },
 });
@@ -79,21 +100,25 @@ class Day extends Component {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography className={classes.heading}>時間條</Typography>
-          <div className={classes.locationContainer}>
-            {schedule.day[dayID].location.map((place,index) => {
-            //console.log(place);
-                return (<Chip
-                  key={index}
-                  label={place.name}
-                  onDelete={this.handleDelete(index,dayID)} //to do delete handle
-                  //className={classes.chip}
-                />)
-              })
-            }
+        <div className={classes.scheduleContainer}>
+            <Typography className={classes.timeHeading}>時間條</Typography>
+            <hr></hr>
+            <div className={classes.locationContainer}>
+              {schedule.day[dayID].location.map((place,index) => {
+              //console.log(place);
+                  return (<Chip
+                    key={index}
+                    label={place.name}
+                    onDelete={this.handleDelete(index,dayID)} //to do delete handle
+                    //className={classes.chip}
+                  />)
+                })
+              }
+            </div>
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
+
     </div>
     )
   }
