@@ -29,13 +29,8 @@ const styles = theme =>({
     color: theme.palette.text.secondary,
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-    overflow: 'hidden',
+    overflowY: 'hidden',
     maxWidth: '30vw',
-  },
-  locationContainer:{
-    display: 'flex',
-    flexDirection: 'column',
-    height: '50vh',
   },
   isFocus:{
     boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
