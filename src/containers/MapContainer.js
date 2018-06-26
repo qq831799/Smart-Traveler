@@ -28,6 +28,7 @@ export class MapContainer extends Component{
         		address:null
         	}
         }
+        this.pacCard = React.createRef();
     }
     selectPlace(place){
     	this.state.place = {...place};
@@ -41,15 +42,15 @@ export class MapContainer extends Component{
 			const {classes} = this.props;
    		return(
    			<div className="MapContainer" >	
-   				<TheMap google={this.props.google} selectPlace={this.selectPlace}></TheMap>
-						<Button
-								className={classes.addLocationContainer}
-								variant="contained"
-								color="primary"
-								onClick={(e) => {this.addPlaceOnClick(e)}}
-							>
-								Add Location
-						</Button>
+   				<TheMap google={this.props.google} selectPlace={this.selectPlace} pacCard = {this.pacCard}></TheMap>
+					<Button
+							className={classes.addLocationContainer}
+							variant="contained"
+							color="primary"
+							onClick={(e) => {this.addPlaceOnClick(e)}}
+						>
+							Add Location
+					</Button>
    			</div>
    		)
    	}
