@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme =>({
   dayRoot:{
+    // display: 'flex',
+    // flexDirection: 'column',
     width: '100%',
     '&:hover': {
       backgroundColor: Grey[200],
@@ -19,15 +21,21 @@ const styles = theme =>({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
+    flexBasis: '20%',
     flexShrink: 0,
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
-    overflow: 'hidden',
     textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    maxWidth: '30vw',
+  },
+  locationContainer:{
+    display: 'flex',
+    flexDirection: 'column',
+    height: '50vh',
   },
   isFocus:{
     boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
@@ -76,7 +84,8 @@ class Day extends Component {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-            時間條
+          <Typography className={classes.heading}>時間條</Typography>
+          <div className={classes.locationContainer}>
             {schedule.day[dayID].location.map((place,index) => {
             //console.log(place);
                 return (<Chip
@@ -86,7 +95,8 @@ class Day extends Component {
                   //className={classes.chip}
                 />)
               })
-          }
+            }
+          </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
