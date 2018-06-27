@@ -38,6 +38,8 @@ class TheMap extends Component{
 		//only display route when there are more than one location
 		if(nextProps.location !== undefined && nextProps.location.length > 1){
 			this.calculateAndDisplayRoute(nextProps.location);
+		}else{
+			this.directionsDisplay.setMap(null);
 		}
 	}
 	calculateAndDisplayRoute(location){
@@ -56,11 +58,14 @@ class TheMap extends Component{
 			optimizeWaypoints: false,
 			travelMode: 'DRIVING'
 		},(response, status) =>{
-			status === 'OK' ?
-			this.directionsDisplay.setDirections(response):
-			window.alert('Directions request failed due to '+status)
+			if(status === 'OK'){
+				this.directionsDisplay.setDirections(response);
+				this.directionsDisplay.setMap(this.map);
+			} else{
+				window.alert('Directions request failed due to '+status);
+			}
 				// let route = response.routes[0];
-			})
+			});
 	}
 	mapOnClick(event){
 		// console.log(event.latLng.toJSON());
@@ -136,7 +141,7 @@ class TheMap extends Component{
 			this.service = new maps.places.PlacesService(this.map);
 			this.directionsService = new maps.DirectionsService;
 			this.directionsDisplay = new maps.DirectionsRenderer;
-			this.directionsDisplay.setMap(this.map);
+			// this.directionsDisplay.setMap(this.map);
 			this.map.controls[google.maps.ControlPosition.TOP].push(ReactDOM.findDOMNode(this.refs.pac));
 			console.log(ReactDOM.findDOMNode(this.refs.pacInput));
 			this.autocomplete = new maps.places.Autocomplete(ReactDOM.findDOMNode(this.refs.pacInput));
