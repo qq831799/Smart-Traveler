@@ -81,6 +81,7 @@ class TheMap extends Component{
 						address: results.formatted_address
 					}
 					this.props.selectPlace(place);
+					ReactDOM.findDOMNode(this.refs.pacInput).value = place.name;
 				}
 			});
 		}
