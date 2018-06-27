@@ -36,13 +36,20 @@ export class MapContainer extends Component{
     	// this.props.dispatch();
     }
     addPlaceOnClick(e){
-    	this.props.actions(this.state.place);
+      if(this.state.place.name){
+        this.props.actions(this.state.place);
+      }
     }
    	render(){
 			const {classes} = this.props;
    		return(
    			<div className="MapContainer" >	
-   				<TheMap google={this.props.google} selectPlace={this.selectPlace} pacCard = {this.pacCard}></TheMap>
+   				<TheMap 
+            google={this.props.google} 
+            selectPlace={this.selectPlace} 
+            pacCard = {this.pacCard}
+            location = {this.props.location}>
+          </TheMap>
 					<Button
 							className={classes.addLocationContainer}
 							variant="contained"
@@ -55,6 +62,12 @@ export class MapContainer extends Component{
    		)
    	}
 }
+function mapStateToProps(state){
+  return {
+    focus: state.locationReducer.focusDay,
+    location: state.locationReducer.day[state.locationReducer.focusDay].location,
+  }
+}
 function mapDispatchToProps(dispatch){
 	return{
 		actions: bindActionCreators(addLocation, dispatch)
@@ -63,7 +76,7 @@ function mapDispatchToProps(dispatch){
 MapContainer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(connect(null,mapDispatchToProps)(GoogleApiWrapper({
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(GoogleApiWrapper({
 	apiKey: 'AIzaSyDpE6ASlrK_fyKwheIpwS6RvmByadRFb_o',
 	libraries: ['places']
 })(MapContainer)))

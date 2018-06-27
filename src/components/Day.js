@@ -99,7 +99,6 @@ class Day extends Component {
         <ExpansionPanelDetails>
         <div className={classes.scheduleContainer}>
             <Typography className={classes.timeHeading}>時間條</Typography>
-            <hr></hr>
             <div className={classes.locationContainer}>
               {schedule.day[dayID].location.map((place,index) => {
               //console.log(place);

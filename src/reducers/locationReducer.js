@@ -19,6 +19,7 @@ const initialState = {
 const locationReducer = (state = initialState, action) => {
   let newState = {...state};
   let nextState;
+  console.log(state);
   nextState = produce(state, draftState => {
     switch (action.type) {
       case actionType.UPDATE_FOCUS_DAY:
@@ -39,13 +40,15 @@ const locationReducer = (state = initialState, action) => {
         draftState.endDate = action.payload.endDate;
         draftState.duration = action.payload.duration;
         const startDate = new Date(draftState.startDate);
-        let tmpDate = new Date(draftState.startDate);
+        
         for(let i = 0 ; i < draftState.duration ; i++){
           let dayID = i+1;
+          let tmpDate = new Date(draftState.startDate);
           tmpDate.setDate(startDate.getDate()+i);
           if(draftState.day[dayID] === undefined){
             draftState.day[dayID] = {location: []};
           }
+          console.log(tmpDate);
           draftState.day[dayID].date = new Date(tmpDate);
           draftState.day[dayID].isFocus = false;
           // let prevLocation = draftState.day[dayID] !== undefined ? draftState.day[dayID] : {location: []};

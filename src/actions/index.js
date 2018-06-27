@@ -14,7 +14,11 @@ export const removeCounter = () => ({
 export const addLocation = (place) => (
 {
 	type: actionType.ADD_LOCATION,
-	payload: place
+	payload: {
+    name: place.name,
+    id: place.id,
+    address: place.address,
+  }
 });
 
 export const deleteLocation = (dayID, index) => (
