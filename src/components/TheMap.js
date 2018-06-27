@@ -44,14 +44,14 @@ class TheMap extends Component{
 		let array = [];
 		for(let i = 1; i < location.length-1; i++){
 			array.push({
-				location: location[i].name,
+				location: location[i].address,
 				stopover: true
 			});
 		}
 		console.log(array);
 		this.directionsService.route({
-			origin: location[0].name,
-			destination: location[location.length-1].name,
+			origin: location[0].address,
+			destination: location[location.length-1].address,
 			waypoints: array,
 			optimizeWaypoints: false,
 			travelMode: 'DRIVING'
