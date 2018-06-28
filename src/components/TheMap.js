@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
 //define the styles of the map and elements on it
 const styles = theme => ({
@@ -16,11 +17,20 @@ const styles = theme => ({
   card: {
   	width: '30vw',
   },
+  cardContent:{
+  	padding: '8px !important',
+  	paddingBottom: '0px',
+  },
   input: {
   	width: '100%',
   },
   title: {
-
+  	margin:'0 auto',
+  },
+  addLocationContainer:{
+  	margin:'10px auto',
+  	// width:'40%',
+  	display: "block",
   },
 });
 
@@ -174,20 +184,25 @@ class TheMap extends Component{
 			<div ref="map" className={classes.mapRoot}>
 			loading map...
 			<Card className={classes.card} ref="pac">
-			<CardContent>
+			<CardContent className={classes.cardContent}>
 				<div className="title">
-		          Autocomplete search
+		          <h2>Search and add location to schedule</h2>
 		        </div>
 		        <div className={classes.pacContainer}>
 				    <input ref="pacInput"
 				    	   placeholder="Enter a location"
 					       className={classes.input}/>
 				</div>
+				<Button className={classes.addLocationContainer} 
+			  				variant="contained" 
+			  				color="primary">
+			  				Add Location
+			 	</Button>
 			</CardContent>
 			</Card>
 			<div ref="infoWindow">
 				<span id="place-name" ></span><br/>
-      			<span id="place-address"></span>
+      	<span id="place-address"></span>
 			</div>
 			</div>
 		)
