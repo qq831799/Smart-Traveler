@@ -105,6 +105,7 @@ class Day extends Component {
                   return (<Chip
                     key={index}
                     label={place.name}
+                    onClick={()=>console.log(index)}
                     onDelete={this.handleDelete(index,dayID)} //to do delete handle
                     //className={classes.chip}
                   />)

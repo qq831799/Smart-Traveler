@@ -34,7 +34,7 @@ class TheMap extends Component{
 	}
 	componentWillReceiveProps(nextProps){
 		const {location} = this.props;
-		console.log(nextProps);
+		// console.log(nextProps);
 		//only display route when there are more than one location
 		if(nextProps.location !== undefined && nextProps.location.length > 1){
 			this.calculateAndDisplayRoute(nextProps.location);
@@ -50,14 +50,17 @@ class TheMap extends Component{
 				stopover: true
 			});
 		}
-		console.log(array);
-		this.directionsService.route({
+		let route = {
 			origin: location[0].address,
 			destination: location[location.length-1].address,
-			waypoints: array,
 			optimizeWaypoints: false,
 			travelMode: 'DRIVING'
-		},(response, status) =>{
+		}
+		if(array.length > 0){
+			route.waypoints= array;
+		}
+		// console.log(array);
+		this.directionsService.route(route,(response, status) =>{
 			if(status === 'OK'){
 				this.directionsDisplay.setDirections(response);
 				this.directionsDisplay.setMap(this.map);
@@ -68,16 +71,15 @@ class TheMap extends Component{
 			});
 	}
 	mapOnClick(event){
-		// console.log(event.latLng.toJSON());
 		this.infoWindow.close();
-    this.marker.setVisible(false);
+    // this.marker.setVisible(false);
 		if(event.placeId){
 			let request = {
 				placeId: event.placeId
 			};
 			this.service.getDetails(request, (results, status) => {
 				if(status = 'OK'){
-					console.log(results);
+					// console.log(results);
 					// this.marker.setPosition(results.geometry.location);
     			// this.marker.setVisible(true);
     			let place = {
@@ -101,7 +103,7 @@ class TheMap extends Component{
       window.alert("No details available for input: '" + place.name + "'");
       return;
     }
-    console.log(place);
+    // console.log(place);
     // If the place has a geometry, then present it on a map.
     if (place.geometry.viewport) {
       this.map.fitBounds(place.geometry.viewport);
@@ -111,7 +113,7 @@ class TheMap extends Component{
     }
     // this.marker.setPosition(place.geometry.location);
     // this.marker.setVisible(true);
-    console.log(this.infoWindowContent);
+    // console.log(this.infoWindowContent);
     // this.infoWindowContent.children['place-icon'].src = place.icon;
     this.infoWindowContent.children['place-name'].textContent = place.name;
     this.infoWindowContent.children['place-address'].textContent = place.formatted_address;
@@ -143,7 +145,6 @@ class TheMap extends Component{
 			this.directionsDisplay = new maps.DirectionsRenderer;
 			// this.directionsDisplay.setMap(this.map);
 			this.map.controls[google.maps.ControlPosition.TOP].push(ReactDOM.findDOMNode(this.refs.pac));
-			console.log(ReactDOM.findDOMNode(this.refs.pacInput));
 			this.autocomplete = new maps.places.Autocomplete(ReactDOM.findDOMNode(this.refs.pacInput));
       // Bind the map's bounds (viewport) property to the autocomplete object,
       // so that the autocomplete requests use the current map bounds for the
