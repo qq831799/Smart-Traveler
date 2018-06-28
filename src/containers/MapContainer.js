@@ -31,7 +31,7 @@ export class MapContainer extends Component{
         this.pacCard = React.createRef();
     }
     selectPlace(place){
-    	this.state.place = {...place};
+    	this.setState({place: {...place}}) ;
     	console.log(this.state.place);
     	// this.props.dispatch();
     }
@@ -77,6 +77,6 @@ MapContainer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(GoogleApiWrapper({
-	apiKey: 'AIzaSyDpE6ASlrK_fyKwheIpwS6RvmByadRFb_o',
+	apiKey: process.env.REACT_APP_GOOGLE_MAP_API,
 	libraries: ['places']
 })(MapContainer)))

@@ -17,7 +17,6 @@ const initialState = {
   }
 };
 const locationReducer = (state = initialState, action) => {
-  let newState = {...state};
   let nextState;
   console.log(state);
   nextState = produce(state, draftState => {
@@ -64,6 +63,8 @@ const locationReducer = (state = initialState, action) => {
         draftState.day[1].isFocus = true;
         // console.log(draftState.day[1].location === state.day[1].location);
         break;
+      default:
+        return state;
     }
   });
 

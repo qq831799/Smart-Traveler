@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
@@ -38,9 +37,6 @@ class TheMap extends Component{
 
 	//rerender the route according to the new arrived props
 	componentWillReceiveProps(nextProps){
-		const {location} = this.props;
-		// console.log(nextProps);
-
 		//only display route when there are more than one location
 		if(nextProps.location !== undefined && nextProps.location.length > 1){
 			this.calculateAndDisplayRoute(nextProps.location);
@@ -90,7 +86,7 @@ class TheMap extends Component{
 				placeId: event.placeId
 			};
 			this.service.getDetails(request, (results, status) => {
-				if(status = 'OK'){
+				if(status === 'OK'){
     			let place = {
 						name: results.name,
 						id: results.place_id,
@@ -152,8 +148,8 @@ class TheMap extends Component{
 			this.map = new maps.Map(node, mapConfig);
 			this.geocoder = new maps.Geocoder();
 			this.service = new maps.places.PlacesService(this.map);
-			this.directionsService = new maps.DirectionsService;
-			this.directionsDisplay = new maps.DirectionsRenderer;
+			this.directionsService = new maps.DirectionsService();
+			this.directionsDisplay = new maps.DirectionsRenderer();
 			this.map.controls[google.maps.ControlPosition.TOP].push(ReactDOM.findDOMNode(this.refs.pac));
 			this.autocomplete = new maps.places.Autocomplete(ReactDOM.findDOMNode(this.refs.pacInput));
       
