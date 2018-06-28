@@ -13,10 +13,7 @@ const styles = theme => ({
       height: '70vh',
       maxHeight: '100%',
       overflowX: 'auto',
-<<<<<<< HEAD
-=======
       overflowY: 'auto',
->>>>>>> 18658afa81d054fc6d911f96281ca63cc165710e
     },
     spaceContent:{
       height: '2em',

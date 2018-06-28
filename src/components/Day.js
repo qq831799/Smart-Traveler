@@ -82,7 +82,6 @@ class Day extends Component {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-<<<<<<< HEAD
           <Grid container>
             {schedule.day[dayID].location.map((place,index) => {
             //console.log(place);
@@ -100,19 +99,6 @@ class Day extends Component {
                     />
                   </Grid>
                 </Grid>)
-=======
-        <div className={classes.scheduleContainer}>
-            <Typography className={classes.timeHeading}>時間條</Typography>
-            <div className={classes.locationContainer}>
-              {schedule.day[dayID].location.map((place,index) => {
-              //console.log(place);
-                  return (<Chip
-                    key={index}
-                    label={place.name}
-                    onClick={()=>console.log(index)}
-                    onDelete={this.handleDelete(index,dayID)} //to do delete handle
-                  />)
->>>>>>> 18658afa81d054fc6d911f96281ca63cc165710e
                 })
             }
             </Grid>

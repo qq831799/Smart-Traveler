@@ -38,11 +38,8 @@ const locationReducer = (state = initialState, action) => {
         draftState.endDate = action.payload.endDate;
         draftState.duration = action.payload.duration;
         const startDate = new Date(draftState.startDate);
-<<<<<<< HEAD
 
-=======
         
->>>>>>> 18658afa81d054fc6d911f96281ca63cc165710e
         for(let i = 0 ; i < draftState.duration ; i++){
           let tmpDate = new Date(draftState.startDate);
           let dayID = i+1;
