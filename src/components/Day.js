@@ -63,19 +63,7 @@ class Day extends Component {
     super(props); 
     this.Text = "No schedule yet!";
   }
-  /*componentWillReceiveProps(nextProps){
-    const {dayID} = nextProps;
-    const {schedule} = nextProps;
-    // console.log(schedule);
-    this.props = nextProps;
-    if(schedule.day[dayID].location.length){
-      this.Text = schedule.day[dayID].location.map((place,index) => {
-        return <p key={index}>{place.name}</p>
-      });
-    }else{
-      this.Text = "No schedule yet!";
-    }
-  }*/
+
   handleDelete = (index, dayID) => () =>{
 
     this.props.deleteLocation(dayID,index);
@@ -107,7 +95,6 @@ class Day extends Component {
                     label={place.name}
                     onClick={()=>console.log(index)}
                     onDelete={this.handleDelete(index,dayID)} //to do delete handle
-                    //className={classes.chip}
                   />)
                 })
               }
