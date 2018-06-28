@@ -15,7 +15,7 @@ const styles = theme => ({
 		height: '90vh',
   },
   card: {
-  	width: '30vw',
+  	width: '23vw',
   },
   cardContent:{
   	padding: '8px !important',
