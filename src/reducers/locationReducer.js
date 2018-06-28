@@ -43,7 +43,6 @@ const locationReducer = (state = initialState, action) => {
         for(let i = 0 ; i < draftState.duration ; i++){
           let tmpDate = new Date(draftState.startDate);
           let dayID = i+1;
-          let tmpDate = new Date(draftState.startDate);
           tmpDate.setDate(startDate.getDate()+i);
           if(draftState.day[dayID] === undefined){
             draftState.day[dayID] = {location: []};
