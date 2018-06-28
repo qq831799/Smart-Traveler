@@ -37,7 +37,8 @@ const styles = theme =>({
     maxWidth: '30vw',
   },
   isFocus:{
-    boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    backgroundColor: Grey[500],
+    //boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
   },
   Chip: {
     width: '4vw',
@@ -46,6 +47,9 @@ const styles = theme =>({
     whiteSpace: 'normal',
     margin: theme.spacing.unit / 2,
   },
+  hide:{
+    display: 'none',
+  }
 });
 
 class Day extends Component {
@@ -68,13 +72,13 @@ class Day extends Component {
     const {schedule} = this.props;
     return (
     <div className={[schedule.day[dayID].isFocus ? classes.isFocus : ""].join(' ')} onClick={()=> this.props.onFocus(dayID)}>
-      <ExpansionPanel className={classes.dayRoot}>
+      <ExpansionPanel className={classes.dayRoot} expanded={dayID === schedule.focusDay}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>
-          <div>Day : {dayID}</div>
-          <div>{ this.convertDate(schedule.day[dayID].date) }</div>
+          Day : {dayID}<br/>
+          { this.convertDate(schedule.day[dayID].date) }
           </Typography>
-          <Typography className={classes.secondaryHeading}>
+          <Typography className={[classes.secondaryHeading , schedule.day[dayID].isFocus ? classes.hide : "" ].join(' ')}>
             {schedule.day[dayID].location.map((place,index) => {
                   return (place.name)
                 }).join(',')
@@ -84,9 +88,10 @@ class Day extends Component {
         <ExpansionPanelDetails>
           <Grid container>
             {schedule.day[dayID].location.map((place,index) => {
-            //console.log(place);
                 return (
-                <Grid container>
+                <Grid container
+                key={index}
+                >
                   <Grid item xs={4}>
                     TimePicker
                   </Grid>
@@ -104,7 +109,6 @@ class Day extends Component {
             </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-
     </div>
     )
   }

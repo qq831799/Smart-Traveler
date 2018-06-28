@@ -12,7 +12,6 @@ const styles = theme => ({
     scheduleContainer:{
       height: '70vh',
       maxHeight: '100%',
-      overflowX: 'auto',
       overflowY: 'auto',
     },
     spaceContent:{
@@ -34,7 +33,6 @@ class ScheduleContainer extends Component {
   //   return (endDate-startDate)/(24*3600*1000) + 1;  //divide by (24*3600*1000) because the unit of difference is microsecond
   // }
   focus(dayID){
-    console.log(dayID);
     this.props.actions.updateFocusDay(dayID);
   }
   render() {

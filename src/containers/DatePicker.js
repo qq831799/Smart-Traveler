@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
   datePickerRoot:{
@@ -24,6 +25,12 @@ const styles = theme => ({
   },
   textField:{
     margin:'0 auto',
+  },
+  button:{
+    backgroundColor: Green[500],
+    '&:hover': {
+      backgroundColor: Green[500],
+    },
   },
   startDate:{
 
@@ -144,6 +151,7 @@ class DatePicker extends Component {
             variant="contained"
             color="primary"
             onClick={(e) => {this.handleClick(e)}}
+            //className={classes.button}
           >
             確認
           </Button>
