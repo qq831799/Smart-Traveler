@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCounter } from '../actions';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -14,6 +13,10 @@ const styles = theme => ({
       height: '70vh',
       maxHeight: '100%',
       overflowX: 'auto',
+<<<<<<< HEAD
+=======
+      overflowY: 'auto',
+>>>>>>> 18658afa81d054fc6d911f96281ca63cc165710e
     },
     spaceContent:{
       height: '2em',
@@ -34,7 +37,7 @@ class ScheduleContainer extends Component {
   //   return (endDate-startDate)/(24*3600*1000) + 1;  //divide by (24*3600*1000) because the unit of difference is microsecond
   // }
   focus(dayID){
-    //console.log(dayID);
+    console.log(dayID);
     this.props.actions.updateFocusDay(dayID);
   }
   render() {
