@@ -154,7 +154,7 @@ class TheMap extends Component{
 				zoom:14,
 				gestureHandling:"cooperative",
 				mapTypeId: 'terrain'
-			})
+			});
 			this.map = new maps.Map(node, mapConfig);
 			this.geocoder = new maps.Geocoder();
 			this.service = new maps.places.PlacesService(this.map);
@@ -195,7 +195,8 @@ class TheMap extends Component{
 				</div>
 				<Button className={classes.addLocationContainer} 
 			  				variant="contained" 
-			  				color="primary">
+			  				color="primary"
+			  				onClick={e=>this.props.addPlace(e)}>
 			  				Add Location
 			 	</Button>
 			</CardContent>

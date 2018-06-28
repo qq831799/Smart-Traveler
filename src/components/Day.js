@@ -71,8 +71,8 @@ class Day extends Component {
       <ExpansionPanel className={classes.dayRoot}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>
-          <div>Day : {dayID}</div>
-          <div>{ this.convertDate(schedule.day[dayID].date) }</div>
+          Day : {dayID}<br/>
+          { this.convertDate(schedule.day[dayID].date) }
           </Typography>
           <Typography className={classes.secondaryHeading}>
             {schedule.day[dayID].location.map((place,index) => {
@@ -86,7 +86,7 @@ class Day extends Component {
             {schedule.day[dayID].location.map((place,index) => {
             //console.log(place);
                 return (
-                <Grid container>
+                <Grid key={index} container>
                   <Grid item xs={4}>
                     TimePicker
                   </Grid>

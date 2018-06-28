@@ -21,6 +21,7 @@ export class MapContainer extends Component{
 	constructor(props) {
         super(props);
         this.selectPlace = this.selectPlace.bind(this);
+        this.addPlaceOnClick = this.addPlaceOnClick.bind(this);
         this.state = {
         	place: {
         		name:null,
@@ -48,16 +49,9 @@ export class MapContainer extends Component{
             google={this.props.google} 
             selectPlace={this.selectPlace} 
             pacCard = {this.pacCard}
-            location = {this.props.location}>
+            location = {this.props.location}
+            addPlace={this.addPlaceOnClick}>
           </TheMap>
-					<Button
-							className={classes.addLocationContainer}
-							variant="contained"
-							color="primary"
-							onClick={(e) => {this.addPlaceOnClick(e)}}
-						>
-							Add Location
-					</Button>
    			</div>
    		)
    	}
