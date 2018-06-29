@@ -47,17 +47,35 @@ class TheMap extends Component{
 
 	//rerender the route according to the new arrived props
 	componentWillReceiveProps(nextProps){
-		//only display route when there are more than one location
-		if(nextProps.location !== undefined && nextProps.location.length > 1){
-			this.calculateAndDisplayRoute(nextProps.location);
-		}else{
+		
+		if(nextProps.focus !== this.props.focus){
+			//if the focusDay changes, clear the map
 			this.directionsDisplay.setMap(null);
+			//only display route when there are more than one location
+			if(nextProps.location.length > 0){
+				this.calculateAndDisplayRoute(nextProps.location);
+			}
+		}else{
+			if(nextProps.location.length !== 0){
+				//if the focusDay doesn't change, only rerender when location changes
+				if(nextProps.location !== this.props.location){
+					this.calculateAndDisplayRoute(nextProps.location);
+				}
+			}else{
+				this.directionsDisplay.setMap(null);
+			}
 		}
 	}
 
 	//the helper function to render the route
 	calculateAndDisplayRoute(location){
-
+		//if there is only one location, draw a marker and return
+		if(location.length === 1){
+			this.directionsDisplay.setMap(null);
+			this.map.setZoom(14);
+			return;
+		}
+		//else try to get the route data
 		//push the locations between the first and the last one in an array as waypoints
 		let waypoints = [];
 		for(let i = 1; i < location.length-1; i++){
@@ -85,13 +103,14 @@ class TheMap extends Component{
 			}});
 	}
 	mapOnClick(event){
-
+		//set the flag isPending to block other add location actions before getting the result
+    this.isPending = true;
 		//close the current infoWindow if open
 		this.infoWindow.close();
     // this.marker.setVisible(false);
-
     //if placeId exist, get details from place service
 		if(event.placeId){
+			
 			let request = {
 				placeId: event.placeId
 			};
@@ -104,8 +123,9 @@ class TheMap extends Component{
 					}
 					//use the callback function from mapcontainer to pass the place data
 					this.props.selectPlace(place);
-					ReactDOM.findDOMNode(this.refs.pacInput).value = place.name;
+					this.inputDom.value = place.name;
 				}
+				this.isPending = false;
 			});
 		}
 	}
@@ -161,7 +181,8 @@ class TheMap extends Component{
 			this.directionsService = new maps.DirectionsService();
 			this.directionsDisplay = new maps.DirectionsRenderer();
 			this.map.controls[google.maps.ControlPosition.TOP].push(ReactDOM.findDOMNode(this.refs.pac));
-			this.autocomplete = new maps.places.Autocomplete(ReactDOM.findDOMNode(this.refs.pacInput));
+			this.inputDom = ReactDOM.findDOMNode(this.refs.pacInput);
+			this.autocomplete = new maps.places.Autocomplete(this.inputDom);
       
       // Bind the map's bounds (viewport) property to the autocomplete object,
       // so that the autocomplete requests use the current map bounds for the
@@ -196,7 +217,10 @@ class TheMap extends Component{
 				<Button className={classes.addLocationContainer} 
 			  				variant="contained" 
 			  				color="primary"
-			  				onClick={e=>this.props.addPlace(e)}>
+			  				onClick={e=> {
+			  					if(!this.isPending){
+			  						this.props.addPlace(e)
+			  				}}}>
 			  				Add Location
 			 	</Button>
 			</CardContent>

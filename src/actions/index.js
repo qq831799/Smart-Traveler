@@ -16,6 +16,13 @@ export const deleteLocation = (dayID, index) => (
   payload: {dayID: dayID, index: index}
 });
 
+export const updateLocationTime = (dayID, index, time) => (
+{
+  type: actionType.UPDATE_LOCATION_TIME
+,
+  payload: {dayID: dayID, index: index, time:time}
+});
+
 export const updateFocusDay = (dayID) => (
 {
 	type: actionType.UPDATE_FOCUS_DAY,

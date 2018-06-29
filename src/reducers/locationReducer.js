@@ -12,7 +12,8 @@ const initialState = {
     1:{
       location:[],
       date:new Date(),
-      isFocus:true
+      isFocus:true,
+      latestTime: '00:00'
     }
   }
 };
@@ -26,10 +27,23 @@ const locationReducer = (state = initialState, action) => {
         draftState.day[draftState.focusDay].isFocus = true;
         break;
       case actionType.ADD_LOCATION:
-        draftState.day[draftState.focusDay].location.push(action.payload);
+        let newLocation = {...action.payload, startTime: state.day[state.focusDay].latestTime}
+        draftState.day[draftState.focusDay].location.push(newLocation);
         break;
       case actionType.DELETE_LOCATION:
         draftState.day[action.payload.dayID].location.splice(action.payload.index,1);
+        break;
+      case actionType.UPDATE_LOCATION_TIME:
+        let {dayID,index,time} = action.payload;
+        if(time === ''){
+          draftState.day[dayID].location[index].startTime = '00:00'
+        }else{
+          draftState.day[dayID].location[index].startTime = time;
+          draftState.day[dayID].location.sort((a,b) => a.startTime > b.startTime ? 
+            1: (b.startTime > a.startTime ? -1 : 0));
+          draftState.day[dayID].latestTime = 
+          draftState.day[dayID].location[draftState.day[dayID].location.length - 1].startTime;
+        }
         break;
       case actionType.UPDATE_TRIP_DURATION:
         const prevDuration = state.duration;
@@ -45,7 +59,8 @@ const locationReducer = (state = initialState, action) => {
           let dayID = i+1;
           tmpDate.setDate(startDate.getDate()+i);
           if(draftState.day[dayID] === undefined){
-            draftState.day[dayID] = {location: []};
+            draftState.day[dayID] = {location: [],latestTime: '00:00'};
+
           }
           draftState.day[dayID].date = new Date(tmpDate);
           draftState.day[dayID].isFocus = false;
@@ -66,7 +81,7 @@ const locationReducer = (state = initialState, action) => {
         return state;
     }
   });
-
+  console.log(nextState);
   return nextState;
 }
 

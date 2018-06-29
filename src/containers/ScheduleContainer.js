@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Day from '../components/Day'
-import { updateFocusDay,deleteLocation } from '../actions';
+import { updateFocusDay,deleteLocation,updateLocationTime } from '../actions';
 
 
 const styles = theme => ({
@@ -43,8 +43,14 @@ class ScheduleContainer extends Component {
         <Grid item xs={12} className={ classes.scheduleContainer}>
           
             {[...Array(schedule.duration)].map(
-              (e , i) => {return <Day dayID={i+1} key={'day' + i + 1} schedule={schedule} 
-              onFocus={this.focus} deleteLocation={this.props.actions.deleteLocation}></Day>}
+              (e , i) => {return <Day 
+                    dayID={i+1} 
+                    key={'day' + i + 1} 
+                    schedule={schedule} 
+                    onFocus={this.focus} 
+                    deleteLocation={this.props.actions.deleteLocation}
+                    updateTime={this.props.actions.changeTime}>
+                </Day>}
             )}
           <div className={classes.spaceContent}></div>
         </Grid>
@@ -66,7 +72,8 @@ function mapDispatchToProps(dispatch){
   return{
     actions:{
       updateFocusDay: bindActionCreators(updateFocusDay, dispatch),
-      deleteLocation: bindActionCreators(deleteLocation, dispatch)
+      deleteLocation: bindActionCreators(deleteLocation, dispatch),
+      changeTime: bindActionCreators(updateLocationTime,dispatch)
     } 
   }
 }

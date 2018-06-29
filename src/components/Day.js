@@ -9,6 +9,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import produce from "immer";
 
 const styles = theme =>({
   dayRoot:{
@@ -41,11 +43,16 @@ const styles = theme =>({
     //boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
   },
   Chip: {
+    display: 'block',
     width: '4vw',
     height: '10vh',
     textOverflow: 'ellipsis',
     whiteSpace: 'normal',
+    margin: 'auto',
     margin: theme.spacing.unit / 2,
+  },
+  singleSchedule:{
+    margin: '2vh 0',
   },
   hide:{
     display: 'none',
@@ -55,12 +62,39 @@ const styles = theme =>({
 class Day extends Component {
   constructor(props){
     super(props); 
-    this.Text = "No schedule yet!";
+
+    this.state = {
+      emptyText:"No schedule yet! Please select and add places you want to go from the map!",
+      locationTime:[]
+    }
+  }
+  componentWillReceiveProps(nextProps){
+    let {dayID,schedule} = nextProps;
+    console.log("cwrp");
+    let nextState = produce(this.state, draftState => {
+      if(schedule.day[dayID].location.length === 0){
+        draftState.emptyText = "No schedule yet! Please select and add places you want to go from the map!";
+      }else{
+        draftState.emptyText = "";
+        draftState.locationTime = schedule.day[dayID].location.map(location => location.startTime);
+      }
+    });
+    this.setState(nextState);
+
   }
   convertDate = (date) =>{
     let dateString = ((date.getMonth()+1)<10 ? '0' + (date.getMonth()+1) : (date.getMonth()+1)) + '-'
                     + ((date.getDate())<10 ? '0' + (date.getDate()) : (date.getDate()));
     return dateString;
+  }
+  handleTimeChange = (index,dayID,value) =>{
+    console.log(value);
+    let nextState = produce(this.state, (draftState) =>{
+      draftState.locationTime[index] = value;
+      
+    });
+    console.log(nextState.locationTime[index]);
+    this.setState(nextState);
   }
   handleDelete = (index, dayID) => () =>{
 
@@ -87,12 +121,22 @@ class Day extends Component {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Grid container>
+            {this.state.emptyText}
             {schedule.day[dayID].location.map((place,index) => {
                 return (
-                <Grid key={index} container>
-
+                <Grid className={classes.singleSchedule}  key={index} container>
                   <Grid item xs={4}>
-                    TimePicker
+                    <TextField
+                      id="time"
+                      // label="start from"
+                      type="time"
+                      value={this.state.locationTime[index]}
+                      className={classes.textField}
+                      InputLabelProps={{shrink: true,}}
+                      inputProps={{step:300}}
+                      onChange={(e) => this.handleTimeChange(index,dayID,e.target.value)}
+                      onBlur={(e)=>{this.props.updateTime(dayID,index,e.target.value)}}
+                    />
                   </Grid>
                   <Grid item xs={8}>
                     <Chip

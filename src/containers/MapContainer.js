@@ -50,6 +50,7 @@ export class MapContainer extends Component{
             selectPlace={this.selectPlace} 
             pacCard = {this.pacCard}
             location = {this.props.location}
+            focus = {this.props.focus}
             addPlace={this.addPlaceOnClick}>
           </TheMap>
    			</div>
