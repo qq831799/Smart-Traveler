@@ -70,13 +70,15 @@ class Day extends Component {
   }
   componentWillReceiveProps(nextProps){
     let {dayID,schedule} = nextProps;
-    console.log("cwrp");
     let nextState = produce(this.state, draftState => {
       if(schedule.day[dayID].location.length === 0){
         draftState.emptyText = "No schedule yet! Please select and add places you want to go from the map!";
       }else{
         draftState.emptyText = "";
-        draftState.locationTime = schedule.day[dayID].location.map(location => location.startTime);
+        if(schedule.day[dayID].location !== this.props.schedule.day[dayID].location){
+          draftState.locationTime = schedule.day[dayID].location.map(location => location.startTime);
+          // console.log("cwrp");
+        } 
       }
     });
     this.setState(nextState);
@@ -88,12 +90,11 @@ class Day extends Component {
     return dateString;
   }
   handleTimeChange = (index,dayID,value) =>{
-    console.log(value);
+    // console.log(value);
     let nextState = produce(this.state, (draftState) =>{
       draftState.locationTime[index] = value;
       
     });
-    console.log(nextState.locationTime[index]);
     this.setState(nextState);
   }
   handleDelete = (index, dayID) => () =>{
@@ -128,7 +129,6 @@ class Day extends Component {
                   <Grid item xs={4}>
                     <TextField
                       id="time"
-                      // label="start from"
                       type="time"
                       value={this.state.locationTime[index]}
                       className={classes.textField}
@@ -137,6 +137,7 @@ class Day extends Component {
                       onChange={(e) => this.handleTimeChange(index,dayID,e.target.value)}
                       onBlur={(e)=>{this.props.updateTime(dayID,index,e.target.value)}}
                     />
+
                   </Grid>
                   <Grid item xs={8}>
                     <Chip
