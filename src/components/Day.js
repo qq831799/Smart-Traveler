@@ -11,6 +11,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import produce from "immer";
+import CarIcon from '@material-ui/icons/DirectionsCar';
+import BusIcon from '@material-ui/icons/DirectionsBus';
+import BikeIcon from '@material-ui/icons/DirectionsBike';
+import SubwayIcon from '@material-ui/icons/DirectionsSubway';
+import WalkerIcon from '@material-ui/icons/DirectionsWalk';
+import { IconButton } from '@material-ui/core';
 
 const styles = theme =>({
   dayRoot:{
@@ -56,7 +62,15 @@ const styles = theme =>({
   },
   hide:{
     display: 'none',
-  }
+  },
+  column:{
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  icon: {
+    color: '#000000',
+    margin: theme.spacing.unit,
+  },
 });
 
 class Day extends Component {
@@ -120,7 +134,26 @@ class Day extends Component {
             }
           </Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className={classes.column}>
+          <Grid container>
+            <Grid item xs={12}>
+            <IconButton  size="small">
+              <CarIcon className={classes.icon}></CarIcon>
+            </IconButton >
+            <IconButton  size="small">
+              <BusIcon className={classes.icon}></BusIcon>
+            </IconButton >
+            <IconButton  size="small">
+              <SubwayIcon className={classes.icon}></SubwayIcon>
+            </IconButton  >
+            <IconButton  size="small">
+              <BikeIcon className={classes.icon}></BikeIcon>
+            </IconButton >
+            <IconButton  size="small">
+              <WalkerIcon className={classes.icon}></WalkerIcon>
+            </IconButton >
+            </Grid>
+          </Grid>
           <Grid container>
             {this.state.emptyText}
             {schedule.day[dayID].location.map((place,index) => {

@@ -10,13 +10,10 @@ import { updateFocusDay,deleteLocation,updateLocationTime } from '../actions';
 
 const styles = theme => ({
     scheduleContainer:{
-      height: '70vh',
-      maxHeight: '100%',
+      //height: '70vh',
+      maxHeight: '70vh',
       overflowY: 'auto',
     },
-    spaceContent:{
-      height: '2em',
-    }
   });
 
 class ScheduleContainer extends Component {
@@ -52,7 +49,6 @@ class ScheduleContainer extends Component {
                     updateTime={this.props.actions.changeTime}>
                 </Day>}
             )}
-          <div className={classes.spaceContent}></div>
         </Grid>
       </Grid>
     )
