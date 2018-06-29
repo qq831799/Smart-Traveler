@@ -91,8 +91,15 @@ class TheMap extends Component{
 			destination: location[location.length-1].address,
 			waypoints: waypoints,
 			optimizeWaypoints: false,
-			travelMode: 'DRIVING'
 		}
+		const {travelMode} = this.props;
+		if(travelMode === 'BUS' || travelMode ==='RAIL'){
+			route.travelMode = 'TRANSIT';
+			route.transitOptions = {modes:[travelMode]};
+		}else{
+			route.travelMode = travelMode
+		}
+		
 		this.directionsService.route(route,(response, status) =>{
 			if(status === 'OK'){
 				this.directionsDisplay.setDirections(response);

@@ -13,7 +13,8 @@ const initialState = {
       location:[],
       date:new Date(),
       isFocus:true,
-      latestTime: '00:00'
+      latestTime: '00:00',
+      travelMode: 'RAIL'
     }
   }
 };
@@ -59,8 +60,7 @@ const locationReducer = (state = initialState, action) => {
           let dayID = i+1;
           tmpDate.setDate(startDate.getDate()+i);
           if(draftState.day[dayID] === undefined){
-            draftState.day[dayID] = {location: [],latestTime: '00:00'};
-
+            draftState.day[dayID] = {location: [],latestTime: '00:00',travelMode: 'DRIVING'};
           }
           draftState.day[dayID].date = new Date(tmpDate);
           draftState.day[dayID].isFocus = false;

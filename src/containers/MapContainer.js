@@ -51,7 +51,8 @@ export class MapContainer extends Component{
             pacCard = {this.pacCard}
             location = {this.props.location}
             focus = {this.props.focus}
-            addPlace={this.addPlaceOnClick}>
+            addPlace={this.addPlaceOnClick}
+            travelMode={this.props.travelMode}>
           </TheMap>
    			</div>
    		)
@@ -61,6 +62,7 @@ function mapStateToProps(state){
   return {
     focus: state.locationReducer.focusDay,
     location: state.locationReducer.day[state.locationReducer.focusDay].location,
+    travelMode: state.locationReducer.day[state.locationReducer.focusDay].travelMode,
   }
 }
 function mapDispatchToProps(dispatch){
