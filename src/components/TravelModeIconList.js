@@ -25,25 +25,23 @@ class TravelModeIconList extends Component {
   render(){
     const {classes} = this.props;
     return (
-    <Grid container onClick={e => 
-    this.props.updateTravelMode(e.target.getAttribute('mode'))
-    }>
+    <Grid container >
       <Grid item xs={12}>
-        <IconButton  size="small" mode='DRIVING'>
+        <IconButton  size="small" onClick={e => this.props.updateTravelMode('DRIVING')}>
           <CarIcon className={classes.icon} />
-        </IconButton >
-        <IconButton  size="small" mode='BUS'>
+        </IconButton>
+        <IconButton  size="small" onClick={e => this.props.updateTravelMode('BUS')}>
           <BusIcon className={classes.icon}/>
-        </IconButton >
-        <IconButton  size="small" mode='RAIL'>
+        </IconButton>
+        <IconButton  size="small" onClick={e => this.props.updateTravelMode('RAIL')}>
           <SubwayIcon className={classes.icon}/>
-        </IconButton  >
-        <IconButton  size="small" mode='BICYCLING'>
+        </IconButton>
+        <IconButton  size="small" onClick={e => this.props.updateTravelMode('BICYCLING')}>
           <BikeIcon className={classes.icon}/>
-        </IconButton >
-        <IconButton  size="small" mode='WALKING'>
+        </IconButton>
+        <IconButton  size="small" onClick={e => this.props.updateTravelMode('WALKING')}>
           <WalkerIcon className={classes.icon}/>
-        </IconButton >
+        </IconButton>
       </Grid>
     </Grid>
     )

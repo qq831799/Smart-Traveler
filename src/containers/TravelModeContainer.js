@@ -13,6 +13,7 @@ class TravelModeContainer extends Component {
     switch ()
   }*/
   updateTravelMode(travelMode){
+    // console.log(travelMode);
     this.props.actions.updateTravelMode(this.props.focusDay , travelMode);
   }
   render(){

@@ -53,14 +53,16 @@ class TheMap extends Component{
 			this.directionsDisplay.setMap(null);
 			//only display route when there are more than one location
 			if(nextProps.location.length > 0){
-				this.calculateAndDisplayRoute(nextProps.location);
+				this.calculateAndDisplayRoute(nextProps.location,nextProps.travelMode);
 			}
 		}else{
 			if(nextProps.location.length !== 0){
 				//if the focusDay doesn't change, only rerender when location changes
+				console.log("HI");
 				console.log(nextProps.travelMode);
+				console.log(this.props.travelMode);
 				if(nextProps.location !== this.props.location || nextProps.travelMode !== this.props.travelMode){
-					this.calculateAndDisplayRoute(nextProps.location);
+					this.calculateAndDisplayRoute(nextProps.location,nextProps.travelMode);
 				}
 			}else{
 				this.directionsDisplay.setMap(null);
@@ -69,7 +71,7 @@ class TheMap extends Component{
 	}
 
 	//the helper function to render the route
-	calculateAndDisplayRoute(location){
+	calculateAndDisplayRoute(location, travelMode){
 		//if there is only one location, draw a marker and return
 		if(location.length === 1){
 			this.directionsDisplay.setMap(null);
@@ -93,14 +95,13 @@ class TheMap extends Component{
 			waypoints: waypoints,
 			optimizeWaypoints: false,
 		}
-		const {travelMode} = this.props;
 		if(travelMode === 'BUS' || travelMode ==='RAIL'){
 			route.travelMode = 'TRANSIT';
 			route.transitOptions = {modes:[travelMode]};
 		}else{
 			route.travelMode = travelMode
 		}
-
+		console.log(route);
 		this.directionsService.route(route,(response, status) =>{
 			if(status === 'OK'){
 				this.directionsDisplay.setDirections(response);
