@@ -47,7 +47,7 @@ class ScheduleContainer extends Component {
                     onFocus={this.focus} 
                     deleteLocation={this.props.actions.deleteLocation}
                     updateTime={this.props.actions.changeTime}
-                    updateTravelMode={this.props.actions.updateTravelMode}>
+                    >
                 </Day>}
             )}
         </Grid>

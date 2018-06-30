@@ -14,7 +14,7 @@ const initialState = {
       date:new Date(),
       isFocus:true,
       latestTime: '00:00',
-      travelMode: 'RAIL'
+      travelMode: 'DRIVING'
     }
   }
 };
