@@ -57,8 +57,6 @@ class ScheduleContainer extends Component {
 ScheduleContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 }
-
-
 function mapStateToProps(state){
   return {
     schedule: state.locationReducer
