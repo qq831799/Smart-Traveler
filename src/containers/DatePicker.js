@@ -153,7 +153,7 @@ class DatePicker extends Component {
             onClick={(e) => {this.handleClick(e)}}
             //className={classes.button}
           >
-            確認
+            Set Days
           </Button>
         </div>
         </Grid>

@@ -11,6 +11,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import produce from "immer";
+import TravelModeIconList from '../containers/TravelModeContainer';
 
 const styles = theme =>({
   dayRoot:{
@@ -56,7 +57,15 @@ const styles = theme =>({
   },
   hide:{
     display: 'none',
-  }
+  },
+  column:{
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  icon: {
+    color: '#000000',
+    margin: theme.spacing.unit,
+  },
 });
 
 class Day extends Component {
@@ -121,7 +130,8 @@ class Day extends Component {
             }
           </Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className={classes.column}>
+          <TravelModeIconList/>
           <Grid container>
             {this.state.emptyText}
             {schedule.day[dayID].location.map((place,index) => {

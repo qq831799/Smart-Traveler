@@ -10,13 +10,10 @@ import { updateFocusDay,deleteLocation,updateLocationTime,updateTravelMode } fro
 
 const styles = theme => ({
     scheduleContainer:{
-      height: '70vh',
-      maxHeight: '100%',
+      //height: '70vh',
+      maxHeight: '70vh',
       overflowY: 'auto',
     },
-    spaceContent:{
-      height: '2em',
-    }
   });
 
 class ScheduleContainer extends Component {
@@ -53,7 +50,6 @@ class ScheduleContainer extends Component {
                     updateTravelMode={this.props.actions.updateTravelMode}>
                 </Day>}
             )}
-          <div className={classes.spaceContent}></div>
         </Grid>
       </Grid>
     )
@@ -62,8 +58,6 @@ class ScheduleContainer extends Component {
 ScheduleContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 }
-
-
 function mapStateToProps(state){
   return {
     schedule: state.locationReducer
