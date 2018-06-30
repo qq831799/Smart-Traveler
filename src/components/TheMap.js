@@ -106,7 +106,10 @@ class TheMap extends Component{
 			if(status === 'OK'){
 				this.directionsDisplay.setDirections(response);
 				this.directionsDisplay.setMap(this.map);
-			} else{
+			}else if(status === 'ZERO_RESULTS'){
+				window.alert('Cannot go to the destination by '+route.travelMode);
+				// this.directionsDisplay.setMap(null);
+			}else{
 				window.alert('Directions request failed due to '+status);
 				// this.directionsDisplay.setMap(null);
 			}});
