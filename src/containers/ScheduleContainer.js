@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Day from '../components/Day'
-import { updateFocusDay,deleteLocation,updateLocationTime } from '../actions';
+import { updateFocusDay,deleteLocation,updateLocationTime,updateTravelMode } from '../actions';
 
 
 const styles = theme => ({
@@ -49,7 +49,8 @@ class ScheduleContainer extends Component {
                     schedule={schedule} 
                     onFocus={this.focus} 
                     deleteLocation={this.props.actions.deleteLocation}
-                    updateTime={this.props.actions.changeTime}>
+                    updateTime={this.props.actions.changeTime}
+                    updateTravelMode={this.props.actions.updateTravelMode}>
                 </Day>}
             )}
           <div className={classes.spaceContent}></div>
@@ -73,7 +74,8 @@ function mapDispatchToProps(dispatch){
     actions:{
       updateFocusDay: bindActionCreators(updateFocusDay, dispatch),
       deleteLocation: bindActionCreators(deleteLocation, dispatch),
-      changeTime: bindActionCreators(updateLocationTime,dispatch)
+      changeTime: bindActionCreators(updateLocationTime,dispatch),
+      updateTravelMode: bindActionCreators(updateTravelMode,dispatch),
     } 
   }
 }

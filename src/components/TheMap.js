@@ -58,7 +58,8 @@ class TheMap extends Component{
 		}else{
 			if(nextProps.location.length !== 0){
 				//if the focusDay doesn't change, only rerender when location changes
-				if(nextProps.location !== this.props.location){
+				console.log(nextProps.travelMode);
+				if(nextProps.location !== this.props.location || nextProps.travelMode !== this.props.travelMode){
 					this.calculateAndDisplayRoute(nextProps.location);
 				}
 			}else{
@@ -99,7 +100,7 @@ class TheMap extends Component{
 		}else{
 			route.travelMode = travelMode
 		}
-		
+
 		this.directionsService.route(route,(response, status) =>{
 			if(status === 'OK'){
 				this.directionsDisplay.setDirections(response);
@@ -214,7 +215,7 @@ class TheMap extends Component{
 			<Card className={classes.card} ref="pac">
 			<CardContent className={classes.cardContent}>
 				<div className="title">
-		          <h2>Search and add location to schedule</h2>
+		        <h2>Search and add location to schedule</h2>
 		        </div>
 		        <div className={classes.pacContainer}>
 				    <input ref="pacInput"

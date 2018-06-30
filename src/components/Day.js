@@ -96,6 +96,7 @@ class Day extends Component {
       
     });
     this.setState(nextState);
+    this.props.updateTravelMode(dayID,'WALKING');
   }
   handleDelete = (index, dayID) => () =>{
 
@@ -137,7 +138,6 @@ class Day extends Component {
                       onChange={(e) => this.handleTimeChange(index,dayID,e.target.value)}
                       onBlur={(e)=>{this.props.updateTime(dayID,index,e.target.value)}}
                     />
-
                   </Grid>
                   <Grid item xs={8}>
                     <Chip

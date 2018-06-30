@@ -77,6 +77,10 @@ const locationReducer = (state = initialState, action) => {
         draftState.day[1].isFocus = true;
         // console.log(draftState.day[1].location === state.day[1].location);
         break;
+      case actionType.UPDATE_TRAVEL_MODE:
+        console.log(action.payload.travelMode);
+        draftState.day[action.payload.dayID].travelMode = action.payload.travelMode;
+        break;
       default:
         return state;
     }

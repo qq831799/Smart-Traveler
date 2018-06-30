@@ -34,3 +34,10 @@ export const updateTripDuration = (startDate,endDate,duration) => (
   type: actionType.UPDATE_TRIP_DURATION,
   payload: {startDate: startDate, endDate: endDate, duration: duration}
 });
+
+export const updateTravelMode = (dayID, travelMode) => (
+{
+  type: actionType.UPDATE_TRAVEL_MODE,
+  payload: {dayID: dayID, travelMode:travelMode}
+});
+
