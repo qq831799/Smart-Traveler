@@ -105,7 +105,6 @@ class Day extends Component {
       
     });
     this.setState(nextState);
-    this.props.updateTravelMode(dayID,'WALKING');
   }
   handleDelete = (index, dayID) => () =>{
 
